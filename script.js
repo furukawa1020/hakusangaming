@@ -808,14 +808,80 @@ function shareCompletion() {
     }
 }
 
+// Confirmation Modal System
+function showConfirmModal(message, onConfirm) {
+    const modal = document.createElement('div');
+    modal.className = 'confirm-modal';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 4000;
+    `;
+    
+    modal.innerHTML = `
+        <div style="
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        ">
+            <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">${message}</p>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <button class="confirm-btn" style="
+                    padding: 0.7rem 1.5rem;
+                    border: none;
+                    border-radius: 8px;
+                    background: #e74c3c;
+                    color: white;
+                    font-weight: bold;
+                    cursor: pointer;
+                ">はい</button>
+                <button class="cancel-btn" style="
+                    padding: 0.7rem 1.5rem;
+                    border: 2px solid #95a5a6;
+                    border-radius: 8px;
+                    background: white;
+                    color: #7f8c8d;
+                    font-weight: bold;
+                    cursor: pointer;
+                ">キャンセル</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    modal.querySelector('.confirm-btn').onclick = () => {
+        modal.remove();
+        onConfirm();
+    };
+    
+    modal.querySelector('.cancel-btn').onclick = () => {
+        modal.remove();
+    };
+    
+    modal.onclick = (e) => {
+        if (e.target === modal) modal.remove();
+    };
+}
+
 // Reset stamps (for testing or restart)
 function resetStamps() {
-    if (confirm('本当にバッジをリセットしますか？この操作は取り消せません。')) {
+    showConfirmModal('本当にバッジをリセットしますか？この操作は取り消せません。', () => {
         localStorage.removeItem('hakusan_badges');
         updateStampDisplay();
         closeSpecialContent();
-        alert('バッジをリセットしました。新しい冒険を始めましょう！');
-    }
+        showNotification('バッジをリセットしました。新しい冒険を始めましょう！', 'success');
+    });
 }
 
 // Add click handlers for map towns
