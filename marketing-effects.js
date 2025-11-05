@@ -131,7 +131,7 @@ class MarketingEffects {
         `;
         
         document.body.appendChild(glow);
-        setTimeout(() => glow.remove(), 2000);
+        setTimeout(() => glow.remove(), EFFECT_DURATION.GLOW);
         
         // バッジグローアニメーション
         if (!document.querySelector('#badge-glow-animations')) {
@@ -188,7 +188,7 @@ class MarketingEffects {
         `;
         
         document.body.appendChild(legendaryOverlay);
-        setTimeout(() => legendaryOverlay.remove(), 3000);
+        setTimeout(() => legendaryOverlay.remove(), EFFECT_DURATION.LEGENDARY);
         
         // レジェンダリーパルスアニメーション
         if (!document.querySelector('#legendary-animations')) {
