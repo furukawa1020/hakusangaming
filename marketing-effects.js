@@ -20,6 +20,18 @@ const logger = {
     error: (...args) => console.error(...args)
 };
 
+// Security utilities
+const SecurityUtils = {
+    safeJSONParse(data, fallback = null) {
+        try {
+            return JSON.parse(data);
+        } catch (e) {
+            logger.error('JSON parse error:', e);
+            return fallback;
+        }
+    }
+};
+
 class MarketingEffects {
     constructor() {
         this.init();
@@ -452,7 +464,8 @@ class MarketingEffects {
             existingPanel.remove();
         }
         
-        const groupProgress = JSON.parse(localStorage.getItem('group_progress') || '{}');
+        const rawProgress = localStorage.getItem('group_progress') || '{}';
+        const groupProgress = SecurityUtils.safeJSONParse(rawProgress, {});
         if (!groupProgress.groupId) return;
         
         const panel = document.createElement('div');
@@ -517,14 +530,18 @@ class MarketingEffects {
     
     getLocalBadges() {
         const saved = localStorage.getItem('hakusan_badges');
-        return saved ? JSON.parse(saved) : [];
+        if (!saved) return [];
+        
+        const parsed = SecurityUtils.safeJSONParse(saved, []);
+        return Array.isArray(parsed) ? parsed : [];
     }
     
     updateGroupProgress() {
         // グループモードでない場合は何もしない
         if (localStorage.getItem('group_challenge_mode') !== 'true') return;
         
-        const groupProgress = JSON.parse(localStorage.getItem('group_progress') || '{}');
+        const rawProgress = localStorage.getItem('group_progress') || '{}';
+        const groupProgress = SecurityUtils.safeJSONParse(rawProgress, {});
         if (!groupProgress.groupId) return;
         
         // 自分の進捗を更新
