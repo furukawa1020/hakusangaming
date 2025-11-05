@@ -1,5 +1,21 @@
 // RPG Map JavaScript for Hakusan League Gym Badge Quest
 
+// Security utilities
+const SecurityUtils = {
+    safeJSONParse(data, defaultValue = null) {
+        try {
+            const parsed = JSON.parse(data);
+            if (typeof parsed === 'object') {
+                return parsed;
+            }
+            return defaultValue;
+        } catch (e) {
+            console.error('JSON parse error:', e);
+            return defaultValue;
+        }
+    }
+};
+
 class RPGMapController {
     constructor() {
         this.gyms = {
@@ -501,12 +517,14 @@ class RPGMapController {
     loadProgress() {
         const saved = localStorage.getItem('hakusan_badges');
         if (saved) {
-            this.badges = JSON.parse(saved);
-            this.badges.forEach(badge => {
-                if (this.gyms[badge]) {
-                    this.gyms[badge].completed = true;
-                }
-            });
+            this.badges = SecurityUtils.safeJSONParse(saved, []);
+            if (Array.isArray(this.badges)) {
+                this.badges.forEach(badge => {
+                    if (this.gyms[badge]) {
+                        this.gyms[badge].completed = true;
+                    }
+                });
+            }
         }
     }
 

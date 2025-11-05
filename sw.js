@@ -11,6 +11,22 @@ const logger = {
     error: (...args) => console.error(...args)
 };
 
+// Security utilities
+const SecurityUtils = {
+    safeJSONParse(data, defaultValue = null) {
+        try {
+            const parsed = JSON.parse(data);
+            if (typeof parsed === 'object') {
+                return parsed;
+            }
+            return defaultValue;
+        } catch (e) {
+            logger.error('JSON parse error in SW:', e);
+            return defaultValue;
+        }
+    }
+};
+
 const CACHE_NAME = 'hakusan-league-v1.0.0';
 const STATIC_CACHE_NAME = 'hakusan-static-v1.0.0';
 const DYNAMIC_CACHE_NAME = 'hakusan-dynamic-v1.0.0';
@@ -376,10 +392,12 @@ async function createOfflinePage() {
         <script>
             // オフライン時でもローカルストレージから情報を取得
             try {
-                const badges = JSON.parse(localStorage.getItem('hakusan_badges') || '[]');
-                document.getElementById('offlineBadgeCount').textContent = 'バッジ: ' + badges.length + '/8';
+                const badgesData = localStorage.getItem('hakusan_badges') || '[]';
+                const badges = JSON.parse(badgesData);
+                document.getElementById('offlineBadgeCount').textContent = 'バッジ: ' + (Array.isArray(badges) ? badges.length : 0) + '/8';
             } catch (e) {
                 // Badge data load failed - silent fail in offline mode
+                document.getElementById('offlineBadgeCount').textContent = 'バッジ: 0/8';
             }
             
             // Lucideアイコンを初期化
