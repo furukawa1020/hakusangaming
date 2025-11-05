@@ -484,12 +484,12 @@ class IncentiveSystem {
             if (badgeCount >= required) {
                 item.classList.add('unlocked');
                 if (statusElement) {
-                    statusElement.textContent = '✅ 獲得可能！';
+                    statusElement.innerHTML = '<img src="icons/ui/checkmark.svg" alt="チェック" class="icon-inline"> 獲得可能！';
                 }
             } else {
                 item.classList.remove('unlocked');
                 if (statusElement) {
-                    statusElement.textContent = `🔒 ${required}個で解放`;
+                    statusElement.innerHTML = `<img src="icons/ui/lock.svg" alt="ロック" class="icon-inline"> ${required}個で解放`;
                 }
             }
         });
