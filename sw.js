@@ -392,9 +392,9 @@ async function createOfflinePage() {
         'Content-Type': 'text/html; charset=utf-8'
       })
     }));
-    console.log('SW: Offline page created');
+    logger.log('SW: Offline page created');
   } catch (error) {
-    console.error('SW: Failed to create offline page:', error);
+    logger.error('SW: Failed to create offline page:', error);
   }
 }
 
