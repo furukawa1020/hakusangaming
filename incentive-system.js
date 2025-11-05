@@ -94,7 +94,7 @@ class IncentiveSystem {
         // Auto remove after 5 seconds
         setTimeout(() => {
             popup.style.animation = 'achievementSlide 0.5s ease reverse';
-            setTimeout(() => popup.remove(), 500);
+            setTimeout(() => popup.remove(), ANIMATION_TIMING.POPUP_CLOSE);
         }, 5000);
     }
 
@@ -576,7 +576,7 @@ class IncentiveSystem {
             `;
             document.body.appendChild(confetti);
             
-            setTimeout(() => confetti.remove(), 3000);
+            setTimeout(() => confetti.remove(), ANIMATION_TIMING.CONFETTI_DURATION);
         }
         
         // Add confetti animation if not exists
