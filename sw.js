@@ -1,6 +1,16 @@
 // Service Worker for Hakusan League Gym Badge Rally PWA
 // Version 1.0.0
 
+// Configuration
+const DEBUG_MODE = false; // 本番環境ではfalseに設定
+
+// Debug logger
+const logger = {
+    log: (...args) => DEBUG_MODE && console.log(...args),
+    warn: (...args) => DEBUG_MODE && console.warn(...args),
+    error: (...args) => console.error(...args)
+};
+
 const CACHE_NAME = 'hakusan-league-v1.0.0';
 const STATIC_CACHE_NAME = 'hakusan-static-v1.0.0';
 const DYNAMIC_CACHE_NAME = 'hakusan-dynamic-v1.0.0';
@@ -36,18 +46,18 @@ const OFFLINE_PAGE = '/offline.html';
 
 // インストール時の処理
 self.addEventListener('install', (event) => {
-  console.log('SW: Installing...');
+  logger.log('SW: Installing...');
   
   event.waitUntil(
     Promise.all([
       // 静的ファイルをキャッシュ
       caches.open(STATIC_CACHE_NAME).then((cache) => {
-        console.log('SW: Caching static files');
+        logger.log('SW: Caching static files');
         return cache.addAll(STATIC_FILES.map(url => {
           // URLの正規化
           return new Request(url, { cache: 'reload' });
         })).catch((error) => {
-          console.warn('SW: Failed to cache some static files:', error);
+          logger.warn('SW: Failed to cache some static files:', error);
           // 一部のファイルがキャッシュできなくても続行
           return Promise.resolve();
         });
@@ -55,18 +65,18 @@ self.addEventListener('install', (event) => {
       // オフラインページを作成・キャッシュ
       createOfflinePage()
     ]).then(() => {
-      console.log('SW: Installation complete');
+      logger.log('SW: Installation complete');
       // 即座にアクティブ化
       return self.skipWaiting();
     }).catch((error) => {
-      console.error('SW: Installation failed:', error);
+      logger.error('SW: Installation failed:', error);
     })
   );
 });
 
 // アクティベート時の処理
 self.addEventListener('activate', (event) => {
-  console.log('SW: Activating...');
+  logger.log('SW: Activating...');
   
   event.waitUntil(
     Promise.all([
@@ -77,7 +87,7 @@ self.addEventListener('activate', (event) => {
             if (cacheName !== STATIC_CACHE_NAME && 
                 cacheName !== DYNAMIC_CACHE_NAME &&
                 cacheName.startsWith('hakusan-')) {
-              console.log('SW: Deleting old cache:', cacheName);
+              logger.log('SW: Deleting old cache:', cacheName);
               return caches.delete(cacheName);
             }
           })
@@ -86,7 +96,7 @@ self.addEventListener('activate', (event) => {
       // すべてのクライアントを制御下に
       self.clients.claim()
     ]).then(() => {
-      console.log('SW: Activation complete');
+      logger.log('SW: Activation complete');
     })
   );
 });
@@ -105,7 +115,7 @@ self.addEventListener('fetch', (event) => {
 
   event.respondWith(
     handleFetch(event.request).catch((error) => {
-      console.error('SW: Fetch failed:', error);
+      logger.error('SW: Fetch failed:', error);
       return new Response('ネットワークエラーが発生しました', {
         status: 503,
         statusText: 'Service Unavailable',
@@ -156,11 +166,11 @@ async function handleStaticFile(request) {
   try {
     const cachedResponse = await caches.match(request);
     if (cachedResponse) {
-      console.log('SW: Serving from cache:', request.url);
+      logger.log('SW: Serving from cache:', request.url);
       return cachedResponse;
     }
     
-    console.log('SW: Fetching static file:', request.url);
+    logger.log('SW: Fetching static file:', request.url);
     const networkResponse = await fetch(request);
     
     if (networkResponse.ok) {
@@ -170,7 +180,7 @@ async function handleStaticFile(request) {
     
     return networkResponse;
   } catch (error) {
-    console.log('SW: Static file fallback for:', request.url);
+    logger.log('SW: Static file fallback for:', request.url);
     return getOfflineFallback(request);
   }
 }
@@ -178,7 +188,7 @@ async function handleStaticFile(request) {
 // 動的コンテンツの処理（ネットワークファースト）
 async function handleDynamicContent(request) {
   try {
-    console.log('SW: Fetching dynamic content:', request.url);
+    logger.log('SW: Fetching dynamic content:', request.url);
     const networkResponse = await fetch(request);
     
     if (networkResponse.ok) {
@@ -188,7 +198,7 @@ async function handleDynamicContent(request) {
     
     return networkResponse;
   } catch (error) {
-    console.log('SW: Trying cache for dynamic content:', request.url);
+    logger.log('SW: Trying cache for dynamic content:', request.url);
     const cachedResponse = await caches.match(request);
     if (cachedResponse) {
       return cachedResponse;
@@ -203,11 +213,11 @@ async function handleDefault(request) {
   try {
     const cachedResponse = await caches.match(request);
     if (cachedResponse) {
-      console.log('SW: Serving default from cache:', request.url);
+      logger.log('SW: Serving default from cache:', request.url);
       return cachedResponse;
     }
     
-    console.log('SW: Fetching default:', request.url);
+    logger.log('SW: Fetching default:', request.url);
     const networkResponse = await fetch(request);
     
     if (networkResponse.ok) {
