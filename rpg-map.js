@@ -727,16 +727,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 1000);
 });
-
-// デバッグ用グローバル関数
-window.debugAddBadge = (gymId) => {
-    if (window.rpgMap) {
-        window.rpgMap.addBadge(gymId);
-    }
-};
-
-window.debugResetProgress = () => {
-    if (window.rpgMap) {
-        window.rpgMap.resetProgress();
-    }
-};

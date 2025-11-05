@@ -805,13 +805,6 @@ function resetStamps() {
     }
 }
 
-// Debug function (remove in production)
-function debugAddAllStamps() {
-    Object.keys(towns).forEach(townCode => {
-        addStamp(townCode);
-    });
-}
-
 // Add click handlers for map towns
 document.addEventListener('click', function(e) {
     if (e.target.closest('.map-town')) {
@@ -834,9 +827,9 @@ document.addEventListener('keydown', function(e) {
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         navigator.serviceWorker.register('/sw.js').then(function(registration) {
-            console.log('ServiceWorker registration successful');
+            logger.log('ServiceWorker registration successful');
         }).catch(function(err) {
-            console.log('ServiceWorker registration failed: ', err);
+            logger.error('ServiceWorker registration failed: ', err);
         });
     });
 }
@@ -1030,49 +1023,6 @@ function updateZoomDisplay() {
     }
 }
 
-// デバッグ用：バッジをリセットする関数（コンソールから実行可能）
-window.resetAllBadges = function() {
-    localStorage.removeItem('hakusan_badges');
-    updateStampDisplay();
-    console.log('All badges have been reset');
-};
-
-// デバッグ用：確認ダイアログ付きリセット関数（ボタンから実行）
-function resetAllBadgesWithConfirm() {
-    const confirmReset = confirm('本当に全てのバッジをリセットしますか？\n\nこの操作は取り消すことができません。');
-    
-    if (confirmReset) {
-        localStorage.removeItem('hakusan_badges');
-        updateStampDisplay();
-        alert('全てのバッジがリセットされました。');
-        
-        // ページをリロードして完全にリセット
-        setTimeout(() => {
-            window.location.reload();
-        }, 500);
-    }
-}
-
-// デバッグ用：特定のバッジをテスト追加
-function testBadgeUpdate(townCode) {
-    logger.log(`Testing badge update for: ${townCode}`);
-    addStamp(townCode);
-    logger.log('Current badges:', getStamps());
-}
-
-// デバッグ用：現在の状態をチェック
-function checkBadgeState() {
-    const stamps = getStamps();
-    console.log('Current badges:', stamps);
-    
-    Object.keys(towns).forEach(townCode => {
-        const townCard = document.querySelector(`[data-town="${townCode}"]`);
-        const badgeIcon = townCard ? townCard.querySelector('.badge-icon') : null;
-        
-        console.log(`${townCode}: card=${!!townCard}, icon=${!!badgeIcon}, content="${badgeIcon?.textContent}", obtained=${stamps.includes(townCode)}`);
-    });
-}
-
 // PWA Install Button Event Listener
 document.addEventListener('DOMContentLoaded', function() {
     // PWAインストールボタンのイベントリスナー
@@ -1084,7 +1034,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // PWAがすでにインストールされているかチェック
     if (window.matchMedia('(display-mode: standalone)').matches || 
         window.navigator.standalone === true) {
-        console.log('✅ PWAはすでにインストールされています');
+        logger.log('✅ PWAはすでにインストールされています');
         hideInstallButton();
     }
 });

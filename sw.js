@@ -379,7 +379,7 @@ async function createOfflinePage() {
                 const badges = JSON.parse(localStorage.getItem('hakusan_badges') || '[]');
                 document.getElementById('offlineBadgeCount').textContent = 'バッジ: ' + badges.length + '/8';
             } catch (e) {
-                console.log('Failed to load badge data');
+                // Badge data load failed - silent fail in offline mode
             }
             
             // Lucideアイコンを初期化
@@ -426,9 +426,9 @@ self.addEventListener('sync', (event) => {
 async function syncBadgeData() {
   try {
     // 将来的にサーバーとの同期機能を実装
-    console.log('SW: Badge data sync requested');
+    logger.log('SW: Badge data sync requested');
   } catch (error) {
-    console.error('SW: Badge sync failed:', error);
+    logger.error('SW: Badge sync failed:', error);
   }
 }
 
@@ -471,4 +471,4 @@ self.addEventListener('notificationclick', (event) => {
   }
 });
 
-console.log('SW: Service Worker script loaded');
+logger.log('SW: Service Worker script loaded');
