@@ -525,7 +525,7 @@ class MarketingEffects {
     }
     
     leaveGroupChallenge() {
-        if (confirm('グループチャレンジから退出しますか？')) {
+        showConfirmModal('グループチャレンジから退出しますか？', () => {
             localStorage.removeItem('group_challenge_mode');
             localStorage.removeItem('group_id');
             localStorage.removeItem('group_progress');
@@ -533,10 +533,10 @@ class MarketingEffects {
             const panel = document.querySelector('.group-progress-panel');
             if (panel) panel.remove();
             
-            this.showToast('グループチャレンジから退出しました');
-        }
+            showNotification('グループチャレンジから退出しました', 'info');
+        });
     }
-    
+
     getLocalBadges() {
         // script.jsのSecurityUtils.getBadges()を使用
         return window.SecurityUtils ? window.SecurityUtils.getBadges() : [];
