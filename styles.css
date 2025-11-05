@@ -237,14 +237,7 @@ main {
     animation: pulse 2s infinite;
 }
 
-.town-card.completed::before {
-    content: '✅';
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    font-size: 3rem;
-    animation: bounce 1s infinite;
-}
+/* 完了マークはLucideアイコンで表示されるため、::before疑似要素は削除 */
 
 .town-icon {
     font-size: 4rem;
