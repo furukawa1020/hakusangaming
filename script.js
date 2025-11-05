@@ -318,28 +318,32 @@ function updateStampDisplay() {
             // バッジ取得済みの場合
             townCard.classList.add('completed');
             if (stampStatus) {
-                stampStatus.textContent = '✅ 獲得済み';
+                stampStatus.innerHTML = '<i data-lucide="check-circle" style="width: 16px; height: 16px;"></i> 獲得済み';
                 stampStatus.classList.add('obtained');
             }
             
-            // バッジアイコンを特定の絵文字に更新
+            // バッジアイコンをLucideアイコンに更新
             if (badgeIcon) {
                 const gymBadgeIcons = {
-                    'tsurugi': '🏹',     // クレインバッジ (弓矢)
-                    'mikawa': '🎺',      // ラッパバッジ (ラッパ)
-                    'mattou': '🌲',      // パインバッジ (松)
-                    'kawachi': '🌉',     // ブリッジバッジ (橋)
-                    'shiramine': '⛰️',    // ピークバッジ (山頂)
-                    'yoshinodani': '🌳', // フォレストバッジ (森)
-                    'torigoe': '🏰',     // キャッスルバッジ (城)
-                    'oguchi': '💧'       // フォールバッジ (滝)
+                    'tsurugi': 'sword',        // クレインバッジ (剣)
+                    'mikawa': 'music',         // ラッパバッジ (音楽)
+                    'mattou': 'tree-pine',     // パインバッジ (松)
+                    'kawachi': 'bridge',       // ブリッジバッジ (橋)
+                    'shiramine': 'mountain-snow', // ピークバッジ (山頂)
+                    'yoshinodani': 'trees',    // フォレストバッジ (森)
+                    'torigoe': 'castle',       // キャッスルバッジ (城)
+                    'oguchi': 'droplet'        // フォールバッジ (滝)
                 };
                 
-                const newIcon = gymBadgeIcons[townCode] || '🏆';
-                badgeIcon.textContent = newIcon;
-                badgeIcon.innerHTML = newIcon; // HTMLも設定（万が一のため）
+                const iconName = gymBadgeIcons[townCode] || 'trophy';
+                badgeIcon.innerHTML = `<i data-lucide="${iconName}" style="width: 24px; height: 24px;"></i>`;
                 
-                logger.log(`Badge icon updated for ${townCode}: ${newIcon}`);
+                // Lucideアイコンを再初期化
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+                
+                logger.log(`Badge icon updated for ${townCode}: ${iconName}`);
             } else {
                 logger.error(`Badge icon element not found for ${townCode}`);
             }
@@ -387,30 +391,40 @@ function updateStampDisplay() {
                     const rarityIndicator = document.createElement('div');
                     rarityIndicator.className = `rarity-indicator ${rarity}`;
                     const rarityIcons = {
-                        'legendary': '🐉',
-                        'rare': '💎',
-                        'uncommon': '🌟', 
-                        'common': '⭐'
+                        'legendary': 'dragon',
+                        'rare': 'gem',
+                        'uncommon': 'star', 
+                        'common': 'star'
                     };
-                    rarityIndicator.textContent = rarityIcons[rarity];
+                    rarityIndicator.innerHTML = `<i data-lucide="${rarityIcons[rarity]}" style="width: 16px; height: 16px;"></i>`;
                     gymPin.appendChild(rarityIndicator);
+                    
+                    // Lucideアイコンを再初期化
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
                 }
                 
                 // Update badge appearance based on specific gym
                 const badgeElement = gymPin.querySelector('.gym-badge');
                 if (badgeElement) {
                     const gymIcons = {
-                        'oguchi': '🧚‍♀️',
-                        'kawachi': '🌊', 
-                        'mattou': '⭐',
-                        'mikawa': '🌍',
-                        'shiramine': '❄️',
-                        'torigoe': '🌿',
-                        'tsurugi': '⚔️',
-                        'yoshinodani': '💧'
+                        'oguchi': 'droplet',
+                        'kawachi': 'waves', 
+                        'mattou': 'star',
+                        'mikawa': 'globe',
+                        'shiramine': 'snowflake',
+                        'torigoe': 'leaf',
+                        'tsurugi': 'swords',
+                        'yoshinodani': 'droplets'
                     };
-                    badgeElement.textContent = gymIcons[townCode];
+                    badgeElement.innerHTML = `<i data-lucide="${gymIcons[townCode]}" style="width: 20px; height: 20px;"></i>`;
                     badgeElement.classList.add('premium-badge');
+                    
+                    // Lucideアイコンを再初期化
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
                 }
             } else {
                 gymPin.classList.remove('completed', 'badge-rarity', 'legendary', 'rare', 'uncommon', 'common');
