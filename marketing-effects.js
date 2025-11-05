@@ -218,12 +218,13 @@ class MarketingEffects {
 
     createRareEffect() {
         // レアバッジ用のエフェクト
-        const sparkles = ['✨', '⭐', '💫', '🌟'];
+        const sparkleIcons = ['sparkles', 'star', 'zap', 'award'];
         
         for (let i = 0; i < 10; i++) {
             setTimeout(() => {
                 const sparkle = document.createElement('div');
-                sparkle.innerHTML = sparkles[Math.floor(Math.random() * sparkles.length)];
+                const iconName = sparkleIcons[Math.floor(Math.random() * sparkleIcons.length)];
+                sparkle.innerHTML = `<i data-lucide="${iconName}" style="width: 32px; height: 32px;"></i>`;
                 sparkle.style.cssText = `
                     position: fixed;
                     top: ${Math.random() * 100}%;
@@ -235,6 +236,12 @@ class MarketingEffects {
                 `;
                 
                 document.body.appendChild(sparkle);
+                
+                // Lucideアイコンを再初期化
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+                
                 setTimeout(() => sparkle.remove(), EFFECT_DURATION.SPARKLE);
             }, i * 200);
         }

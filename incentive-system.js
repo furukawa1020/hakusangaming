@@ -88,7 +88,7 @@ class IncentiveSystem {
     // CORE ACHIEVEMENT SYSTEM
     // ===========================================
     
-    unlockAchievement(achievementId, title, description, icon = '🏆') {
+    unlockAchievement(achievementId, title, description, icon = 'trophy') {
         if (this.achievements.includes(achievementId)) return;
         
         this.achievements.push(achievementId);
@@ -238,20 +238,20 @@ class IncentiveSystem {
         
         return `
             <div class="share-section">
-                <h3>🌟 冒険をシェアしよう！ 🌟</h3>
+                <h3><i data-lucide="star" style="width: 20px; height: 20px;"></i> 冒険をシェアしよう！ <i data-lucide="star" style="width: 20px; height: 20px;"></i></h3>
                 <p>ハクサンリーグで${badges.length}個のバッジを獲得！<br>完成度 ${completionPercent}% 達成中！</p>
                 <div class="share-buttons">
                     <button class="share-btn twitter" onclick="incentiveSystem.shareToTwitter()">
-                        🐦 Twitterでシェア
+                        <i data-lucide="twitter" style="width: 16px; height: 16px;"></i> Twitterでシェア
                     </button>
                     <button class="share-btn facebook" onclick="incentiveSystem.shareToFacebook()">
-                        📘 Facebookでシェア
+                        <i data-lucide="facebook" style="width: 16px; height: 16px;"></i> Facebookでシェア
                     </button>
                     <button class="share-btn instagram" onclick="incentiveSystem.shareToInstagram()">
-                        📷 Instagramでシェア
+                        <i data-lucide="instagram" style="width: 16px; height: 16px;"></i> Instagramでシェア
                     </button>
                     <button class="share-btn line" onclick="incentiveSystem.shareToLine()">
-                        💬 LINEでシェア
+                        <i data-lucide="message-circle" style="width: 16px; height: 16px;"></i> LINEでシェア
                     </button>
                 </div>
             </div>
@@ -296,12 +296,12 @@ class IncentiveSystem {
         
         // Achievement for first share
         if (this.stats.socialShares === 1) {
-            this.unlockAchievement('first_share', 'SNSデビュー！', '初めて冒険をシェアしました', '📱');
+            this.unlockAchievement('first_share', 'SNSデビュー！', '初めて冒険をシェアしました', 'smartphone');
         }
         
         // Achievement for multiple shares
         if (this.stats.socialShares >= 5) {
-            this.unlockAchievement('social_butterfly', 'SNSマスター', '5回以上シェアしました', '🦋');
+            this.unlockAchievement('social_butterfly', 'SNSマスター', '5回以上シェアしました', 'share-2');
         }
     }
 
@@ -555,21 +555,21 @@ class IncentiveSystem {
         // Collection milestones
         const badgeCount = this.getBadges().length;
         if (badgeCount === 1) {
-            this.unlockAchievement('first_badge', 'ファーストステップ！', '初めてのバッジを獲得', '🥇');
+            this.unlockAchievement('first_badge', 'ファーストステップ！', '初めてのバッジを獲得', 'award');
         } else if (badgeCount === 4) {
-            this.unlockAchievement('half_way', 'ハーフウェイ！', '半分のバッジを獲得', '🏃‍♂️');
+            this.unlockAchievement('half_way', 'ハーフウェイ！', '半分のバッジを獲得', 'trophy');
         } else if (badgeCount === 8) {
-            this.unlockAchievement('grand_master', 'グランドマスター！', '全てのバッジを獲得', '👑');
+            this.unlockAchievement('grand_master', 'グランドマスター！', '全てのバッジを獲得', 'crown');
         }
         
         // Rarity collection achievements
         const rareBadges = this.getBadges().filter(b => this.badgeRarities[b] === 'rare').length;
         if (rareBadges >= 2) {
-            this.unlockAchievement('rare_collector', 'レアコレクター', '2個以上のレアバッジを獲得', '💎');
+            this.unlockAchievement('rare_collector', 'レアコレクター', '2個以上のレアバッジを獲得', 'gem');
         }
         
         if (this.badgeRarities[gymId] === 'legendary') {
-            this.unlockAchievement('legend_hunter', 'レジェンドハンター', 'レジェンダリーバッジを獲得', '🐉');
+            this.unlockAchievement('legend_hunter', 'レジェンドハンター', 'レジェンダリーバッジを獲得', 'dragon');
         }
         
         this.updateAllIncentiveElements();
@@ -589,19 +589,21 @@ class IncentiveSystem {
 
     getRarityIcon(rarity) {
         const icons = {
-            'legendary': '🐉',
-            'rare': '💎', 
-            'uncommon': '🌟',
-            'common': '⭐'
+            'legendary': 'dragon',
+            'rare': 'gem', 
+            'uncommon': 'star',
+            'common': 'star'
         };
-        return icons[rarity] || '🏅';
+        return icons[rarity] || 'award';
     }
 
     triggerConfetti() {
-        // Simple confetti effect using emoji
+        // Simple confetti effect using Lucide icons
+        const iconNames = ['party-popper', 'sparkles', 'star', 'gift'];
         for (let i = 0; i < 30; i++) {
             const confetti = document.createElement('div');
-            confetti.innerHTML = ['🎉', '✨', '🌟', '🎊'][Math.floor(Math.random() * 4)];
+            const iconName = iconNames[Math.floor(Math.random() * iconNames.length)];
+            confetti.innerHTML = `<i data-lucide="${iconName}" style="width: 24px; height: 24px;"></i>`;
             confetti.style.cssText = `
                 position: fixed;
                 top: -10px;
@@ -614,6 +616,11 @@ class IncentiveSystem {
             document.body.appendChild(confetti);
             
             setTimeout(() => confetti.remove(), ANIMATION_TIMING.CONFETTI_DURATION);
+        }
+        
+        // Lucideアイコンを再初期化
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
         }
         
         // Add confetti animation if not exists
