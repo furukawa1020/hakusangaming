@@ -581,7 +581,10 @@ class IncentiveSystem {
     
     getBadges() {
         const saved = localStorage.getItem('hakusan_badges');
-        return saved ? JSON.parse(saved) : [];
+        if (!saved) return [];
+        
+        const parsed = SecurityUtils.safeJSONParse(saved, []);
+        return Array.isArray(parsed) ? parsed : [];
     }
 
     getRarityIcon(rarity) {
@@ -651,7 +654,8 @@ class IncentiveSystem {
     loadStats() {
         const saved = localStorage.getItem('hakusan_stats');
         if (saved) {
-            this.stats = { ...this.stats, ...JSON.parse(saved) };
+            const parsed = SecurityUtils.safeJSONParse(saved, {});
+            this.stats = { ...this.stats, ...parsed };
         }
     }
 
@@ -662,7 +666,8 @@ class IncentiveSystem {
     loadAchievements() {
         const saved = localStorage.getItem('hakusan_achievements');
         if (saved) {
-            this.achievements = JSON.parse(saved);
+            const parsed = SecurityUtils.safeJSONParse(saved, []);
+            this.achievements = Array.isArray(parsed) ? parsed : [];
         }
     }
 
@@ -673,7 +678,8 @@ class IncentiveSystem {
     loadUnlockedContent() {
         const saved = localStorage.getItem('hakusan_unlocked_content');
         if (saved) {
-            this.unlockedContent = JSON.parse(saved);
+            const parsed = SecurityUtils.safeJSONParse(saved, []);
+            this.unlockedContent = Array.isArray(parsed) ? parsed : [];
         }
     }
 
