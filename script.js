@@ -194,19 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Get stamps from localStorage
 function getStamps() {
-    const stamps = localStorage.getItem('hakusan_badges');
-    if (!stamps) return [];
-    
-    const parsed = SecurityUtils.safeJSONParse(stamps, []);
-    
-    // Validate data structure
-    if (!SecurityUtils.validateBadgeData(parsed)) {
-        logger.error('Invalid badge data detected, resetting');
-        localStorage.removeItem('hakusan_badges');
-        return [];
-    }
-    
-    return parsed;
+    return SecurityUtils.getBadges();
 }
 
 // 確実にバッジアイコンを更新する専用関数

@@ -347,7 +347,7 @@ class MarketingEffects {
         // 体験レビュー投稿機能
         const reviewButton = document.createElement('button');
         reviewButton.className = 'review-share-btn';
-        reviewButton.innerHTML = '📝 体験レビューを投稿';
+        reviewButton.innerHTML = '<i data-lucide="file-text" style="width: 16px; height: 16px;"></i> 体験レビューを投稿';
         reviewButton.style.cssText = `
             position: fixed;
             bottom: 20px;
@@ -424,7 +424,7 @@ class MarketingEffects {
         
         // グループチャレンジボタン追加
         const groupBtn = document.createElement('button');
-        groupBtn.innerHTML = '👥 グループチャレンジ';
+        groupBtn.innerHTML = '<i data-lucide="users" style="width: 16px; height: 16px;"></i> グループチャレンジ';
         groupBtn.className = 'group-challenge-btn';
         groupBtn.style.cssText = `
             position: fixed;
