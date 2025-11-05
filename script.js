@@ -103,7 +103,12 @@ async function installPWA() {
     try {
         const installBtn = document.getElementById('pwaInstallBtn');
         installBtn.disabled = true;
-        installBtn.textContent = '📱 インストール中...';
+        installBtn.innerHTML = '<i data-lucide="smartphone" style="width: 16px; height: 16px;"></i> インストール中...';
+        
+        // Lucideアイコンを再初期化
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
 
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
@@ -115,7 +120,10 @@ async function installPWA() {
         } else {
             logger.log('❌ ユーザーがPWAインストールを拒否');
             installBtn.disabled = false;
-            installBtn.textContent = '📱 アプリとしてインストール';
+            installBtn.innerHTML = '<i data-lucide="smartphone" style="width: 16px; height: 16px;"></i> アプリとしてインストール';
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
         }
         
         deferredPrompt = null;
@@ -124,7 +132,10 @@ async function installPWA() {
         logger.error('❌ PWAインストールエラー:', error);
         const installBtn = document.getElementById('pwaInstallBtn');
         installBtn.disabled = false;
-        installBtn.textContent = '📱 アプリとしてインストール';
+        installBtn.innerHTML = '<i data-lucide="smartphone" style="width: 16px; height: 16px;"></i> アプリとしてインストール';
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
     }
 }
 
