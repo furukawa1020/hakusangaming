@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="town-styles.css">
     <link rel="stylesheet" href="../incentive-system.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <header>
@@ -26,7 +27,7 @@
 
         <div class="story-content">
             <section class="story-section">
-                <h2>🏔️ 白山信仰の聖地</h2>
+                <h2><i data-lucide="mountain" style="width: 20px; height: 20px;"></i> 白山信仰の聖地</h2>
                 <p>
                     鶴来は白山信仰の中心地として、古くから多くの参拝者が訪れる神聖な場所です。
                     白山比咩神社（しらやまひめじんじゃ）は、全国に約3,000社ある白山神社の総本宮として知られています。
@@ -38,7 +39,7 @@
             </section>
 
             <section class="story-section">
-                <h2>💎 クレインバッジについて</h2>
+                <h2><i data-lucide="gem" style="width: 20px; height: 20px;"></i> クレインバッジについて</h2>
                 <p>
                     <strong>クレインバッジ（The Crane Badge）</strong>は、町の名前にもある「鶴」と、
                     霊峰白山の玄関口であり、全国白山神社の総本宮「白山比咩神社」をモチーフにしました。
@@ -61,32 +62,31 @@
             </section>
 
             <section class="story-section">
-                <h2>🎯 探索ポイント</h2>
+                <h2><i data-lucide="target" style="width: 20px; height: 20px;"></i> 探索ポイント</h2>
                 <ul class="explore-points">
-                    <li>🏛️ 白山比咩神社 - 白山信仰の総本宮</li>
-                    <li>🌊 手取川 - 清らかな水の流れ</li>
-                    <li>🏮 おかえり祭り - 伝統の神輿渡御</li>
-                    <li>🌺 白山菊酒 - 地域の特産品</li>
+                    <li><i data-lucide="church" style="width: 16px; height: 16px;"></i> 白山比咩神社 - 白山信仰の総本宮</li>
+                    <li><i data-lucide="waves" style="width: 16px; height: 16px;"></i> 手取川 - 清らかな水の流れ</li>
+                    <li><i data-lucide="circle-dot" style="width: 16px; height: 16px;"></i> おかえり祭り - 伝統の神輿渡御</li>
+                    <li><i data-lucide="grape" style="width: 16px; height: 16px;"></i> 白山菊酒 - 地域の特産品</li>
                 </ul>
             </section>
 
             <section class="story-section">
-                <h2>📚 ジムリーダーの物語</h2>
+                <h2><i data-lucide="book-open" style="width: 20px; height: 20px;"></i> 鶴来の由来</h2>
                 <div class="story-text">
                     <p>
-                        昔、この地に一羽の美しい鶴が舞い降りたという言い伝えがあります。
-                        その鶴は白山の神様の使いとされ、人々に豊作と平和をもたらしました。
+                        鶴来は白山信仰の中心地として、古くから多くの参拝者を迎えてきました。
+                        白山比咩神社の門前町として栄え、白山への登拝路の起点として重要な役割を果たしてきた歴史があります。
                     </p>
                     <p>
-                        鶴来の名前は、この神聖な鶴が来た場所という意味から付けられたと言われています。
-                        クレインバッジは、その神聖な鶴の力を宿した特別なバッジです。
-                        このバッジを手にした者は、神々の加護を受けると言われています。
+                        クレインバッジは、神聖な白山比咩神社と、町の名前にもある「鶴」をモチーフにしたデザインで、
+                        白山信仰の精神性を表現しています。
                     </p>
                 </div>
             </section>
 
             <section class="gym-challenge">
-                <h2>🏆 ジムチャレンジ</h2>
+                <h2><i data-lucide="trophy" style="width: 20px; height: 20px;"></i> ジムチャレンジ</h2>
                 <div class="challenge-description">
                     <p>鶴来ジムのチャレンジは「神聖なる試練」です。</p>
                     <p>純粋な心と信仰の力が試されます。</p>
@@ -95,8 +95,8 @@
         </div>
 
         <div class="navigation">
-            <button class="nav-btn back-btn" onclick="goBack()">🏠 ハクサンリーグに戻る</button>
-            <button class="nav-btn next-btn" onclick="suggestNextTown()">🗺️ 次のジムを探す</button>
+            <button class="nav-btn back-btn" onclick="goBack()"><i data-lucide="home" style="width: 16px; height: 16px;"></i> ハクサンリーグに戻る</button>
+            <button class="nav-btn next-btn" onclick="suggestNextTown()"><i data-lucide="map" style="width: 16px; height: 16px;"></i> 次のジムを探す</button>
         </div>
     </main>
 
@@ -106,5 +106,11 @@
 
     <script src="../script.js"></script>
     <script src="town-script.js"></script>
+    <script>
+        // Lucideアイコンを初期化
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    </script>
 </body>
 </html>

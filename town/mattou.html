@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="town-styles.css">
     <link rel="stylesheet" href="../incentive-system.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <header>
@@ -16,16 +17,16 @@
 
     <main>
         <div class="town-hero">
-            <div class="town-icon">🏛️</div>
+            <div class="town-icon"><i data-lucide="landmark" style="width: 48px; height: 48px;"></i></div>
             <div class="stamp-status-display" id="stampStatus">
-                <span id="stampIcon">📍</span>
+                <span id="stampIcon"><i data-lucide="map-pin" style="width: 20px; height: 20px;"></i></span>
                 <span id="stampText">スタンプ確認中...</span>
             </div>
         </div>
 
         <div class="story-content">
             <section class="story-section">
-                <h2>🏛️ 白山市の中心</h2>
+                <h2><i data-lucide="landmark" style="width: 20px; height: 20px;"></i> 白山市の中心</h2>
                 <p>
                     松任は白山市の中心地として、行政・経済・文化の拠点となっています。
                     現在の白山市役所があり、多くの人々が行き交う活気ある町です。
@@ -37,7 +38,7 @@
             </section>
 
             <section class="story-section">
-                <h2>🌸 文化と教育</h2>
+                <h2><i data-lucide="flower-2" style="width: 20px; height: 20px;"></i> 文化と教育</h2>
                 <p>
                     松任には多くの学校や文化施設があり、
                     地域の教育・文化の発展に大きく貢献しています。
@@ -51,34 +52,33 @@
             </section>
 
             <section class="story-section">
-                <h2>🎯 探索ポイント</h2>
+                <h2><i data-lucide="target" style="width: 20px; height: 20px;"></i> 探索ポイント</h2>
                 <ul class="explore-points">
-                    <li>🏛️ 白山市役所 - 市の中心機関</li>
-                    <li>🎭 松任文化会館 - 文化の発信地</li>
-                    <li>🚆 松任駅 - 交通の要衝</li>
-                    <li>🌳 松任総合運動公園 - 市民の憩いの場</li>
+                    <li><i data-lucide="building-2" style="width: 16px; height: 16px;"></i> 白山市役所 - 市の中心機関</li>
+                    <li><i data-lucide="theater" style="width: 16px; height: 16px;"></i> 松任文化会館 - 文化の発信地</li>
+                    <li><i data-lucide="train" style="width: 16px; height: 16px;"></i> 松任駅 - 交通の要衝</li>
+                    <li><i data-lucide="trees" style="width: 16px; height: 16px;"></i> 松任総合運動公園 - 市民の憩いの場</li>
                 </ul>
             </section>
 
             <section class="story-section">
-                <h2>📚 物語の続き</h2>
+                <h2><i data-lucide="book-open" style="width: 20px; height: 20px;"></i> 松任について</h2>
                 <div class="story-text">
                     <p>
-                        松任の名前は、この地に立派な松の木があり、
-                        その下で多くの人々が語り合ったことから来ているとされます。
+                        松任は白山市の中心地として、長年にわたり地域の発展を支えてきました。
+                        行政・教育・文化の拠点として、市民生活の中心的な役割を果たしています。
                     </p>
                     <p>
-                        その松の木は「任せる」という意味も込められ、
-                        人々が互いに支え合い、信頼し合う町として発展してきました。
-                        今でも松任は、白山市全体を支える重要な役割を担っています。
+                        現在も白山市役所が置かれ、周辺地域を結ぶ交通の要衝として、
+                        多くの人々が集まる活気ある町です。
                     </p>
                 </div>
             </section>
         </div>
 
         <div class="navigation">
-            <button class="nav-btn back-btn" onclick="goBack()">🏠 トップに戻る</button>
-            <button class="nav-btn next-btn" onclick="suggestNextTown()">🗺️ 次の町を探す</button>
+            <button class="nav-btn back-btn" onclick="goBack()"><i data-lucide="home" style="width: 16px; height: 16px;"></i> トップに戻る</button>
+            <button class="nav-btn next-btn" onclick="suggestNextTown()"><i data-lucide="map" style="width: 16px; height: 16px;"></i> 次の町を探す</button>
         </div>
     </main>    <footer>
         <p>&copy; 2025 白山市NFCスタンプラリー「はくさんバッジクエスト」</p>
@@ -86,5 +86,11 @@
 
     <script src="../script.js"></script>
     <script src="town-script.js"></script>
+    <script>
+        // Lucideアイコンを初期化
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    </script>
 </body>
 </html>
