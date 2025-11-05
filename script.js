@@ -654,10 +654,10 @@ function showSpecialContent() {
     const specialContent = `
         <div class="special-content-modal">
             <div class="special-content">
-                <h2>🏆 おめでとうございます！ 🏆</h2>
+                <h2><i data-lucide="trophy" style="width: 48px; height: 48px;"></i> おめでとうございます！ <i data-lucide="trophy" style="width: 48px; height: 48px;"></i></h2>
                 <p>白山市旧8市町村すべてのスタンプを集めました！</p>                <div class="completion-badge">
                     <div class="badge-content">
-                        <h3>🌟 はくさんマスター 🌟</h3>
+                        <h3><i data-lucide="sparkles" style="width: 32px; height: 32px;"></i> はくさんマスター <i data-lucide="sparkles" style="width: 32px; height: 32px;"></i></h3>
                         <p>白山市完全制覇証明書</p>
                         <small>完了日：${new Date().toLocaleDateString('ja-JP')}</small>
                     </div>
@@ -665,8 +665,8 @@ function showSpecialContent() {
                 <p>あなたは白山市の魅力を余すことなく体験しました。<br>
                 この素晴らしい経験を友人や家族とシェアしてください！</p>
                 <div class="share-buttons">
-                    <button onclick="shareCompletion()">🎉 シェアする</button>
-                    <button onclick="resetStamps()">🔄 最初から始める</button>
+                    <button onclick="shareCompletion()"><i data-lucide="share-2" style="width: 16px; height: 16px;"></i> シェアする</button>
+                    <button onclick="resetStamps()"><i data-lucide="refresh-cw" style="width: 16px; height: 16px;"></i> 最初から始める</button>
                 </div>
                 <button onclick="closeSpecialContent()">閉じる</button>
             </div>

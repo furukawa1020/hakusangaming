@@ -10,6 +10,17 @@ const ANIMATION_TIMING = {
     CONFETTI_DURATION: 3000
 };
 
+// Incentive System for Hakusan League Gym Badge Rally
+// Version 1.0.0
+
+// Configuration
+const DEBUG_MODE = false; // 本番環境ではfalseに設定
+
+// Constants
+const UPDATE_INTERVAL_MS = 30000; // 30秒 - ライブ統計更新間隔
+
+// Dependencies: Requires SecurityUtils from script.js
+
 // Debug logger
 const logger = {
     log: (...args) => DEBUG_MODE && console.log(...args),
@@ -277,7 +288,8 @@ class IncentiveSystem {
         const badges = this.getBadges();
         const text = `🏔️ ハクサンリーグで${badges.length}/8個のジムバッジを獲得！白山市の魅力を再発見中✨\n\n#ハクサンリーグ #白山市 #NFCバッジラリー #石川観光`;
         navigator.clipboard.writeText(text).then(() => {
-            alert('📷 Instagram用のテキストをコピーしました！\nInstagramを開いて投稿してください。');
+            // モーダル通知（alert置換）
+            this.showNotification('Instagram用のテキストをコピーしました！Instagramを開いて投稿してください。');
         });
         this.trackSocialShare('instagram');
     }

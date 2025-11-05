@@ -393,12 +393,17 @@ class RPGMapController {
         preview.innerHTML = `
             <h4>${gym.name}ジム</h4>
             <p>タイプ: ${this.getTypeNameJa(gym.type)}</p>
-            <p>状態: ${gym.completed ? '制覇済み ✅' : '未挑戦 ❌'}</p>
+            <p>状態: ${gym.completed ? '<span style="color: #27ae60;">制覇済み</span> <i data-lucide="check-circle" style="width: 14px; height: 14px;"></i>' : '<span style="color: #e74c3c;">未挑戦</span> <i data-lucide="x-circle" style="width: 14px; height: 14px;"></i>'}</p>
             <p>リーダー: ${this.getGymLeaderName(gymId)}</p>
             <small>クリックして挑戦</small>
         `;
         
         document.body.appendChild(preview);
+        
+        // Lucideアイコンを初期化
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
         
         // マウス位置に表示
         document.addEventListener('mousemove', this.updatePreviewPosition);
@@ -427,14 +432,14 @@ class RPGMapController {
 
     interactWithLegendary() {
         if (this.badges.length === 8) {
-            this.showMessage('🐉 伝説のポケモンが現れた！\n全てのジムバッジを集めた真の チャンピオンよ...', 'legendary');
+            this.showMessage('伝説のポケモンが現れた！\n全てのジムバッジを集めた真のチャンピオンよ...', 'legendary');
         } else {
-            this.showMessage('🐉 まだその時ではない...\n全てのジムバッジを集めてから来るがよい。', 'warning');
+            this.showMessage('まだその時ではない...\n全てのジムバッジを集めてから来るがよい。', 'warning');
         }
     }
 
     collectTreasure(index) {
-        const treasures = ['💎 ダイヤモンド', '🏆 チャンピオントロフィー', '⭐ スターピース'];
+        const treasures = ['ダイヤモンド', 'チャンピオントロフィー', 'スターピース'];
         this.showMessage(`${treasures[index]}を発見した！`, 'success');
         
         // 宝箱を非表示にする
@@ -640,12 +645,12 @@ class RPGMapController {
             let objective = '';
             
             if (this.badges.length === 0) {
-                objective = '🎯 白山地方の冒険を始めよう！\n任意のジムを選んでバッジ収集を開始。';
+                objective = '白山地方の冒険を始めよう！\n任意のジムを選んでバッジ収集を開始。';
             } else if (this.badges.length < 8) {
                 const remaining = 8 - this.badges.length;
-                objective = `🎯 残り${remaining}個のジムバッジを集めよう！\n${this.getNextGymRecommendation()}`;
+                objective = `残り${remaining}個のジムバッジを集めよう！\n${this.getNextGymRecommendation()}`;
             } else {
-                objective = '🏆 全てのジムバッジを獲得！\n白山山頂の伝説のポケモンに挑戦しよう。';
+                objective = '全てのジムバッジを獲得！\n白山山頂の伝説のポケモンに挑戦しよう。';
             }
             
             objectiveContent.textContent = objective;
@@ -671,7 +676,7 @@ class RPGMapController {
         championModal.innerHTML = `
             <div class="complete-modal">
                 <div class="champion-effects"></div>
-                <h2>🏆 おめでとうございます！ 🏆</h2>
+                <h2><i data-lucide="trophy" style="width: 48px; height: 48px;"></i> おめでとうございます！ <i data-lucide="trophy" style="width: 48px; height: 48px;"></i></h2>
                 <p>全てのジムバッジを集めました！</p>
                 <p>あなたは真の<br><strong>ハクサンリーグチャンピオン</strong>です！</p>
                 <button class="complete-btn" onclick="this.closest('.complete-section').remove()">
@@ -681,6 +686,11 @@ class RPGMapController {
         `;
         
         document.body.appendChild(championModal);
+        
+        // Lucideアイコンを初期化
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
     }
 
     checkUrlParameters() {

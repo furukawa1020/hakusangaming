@@ -28,15 +28,20 @@ function updateTownStampStatus(townCode) {
     const stampStatus = document.getElementById('stampStatus');
     
     if (stamps.includes(townCode)) {
-        stampIcon.textContent = '🏆';
+        stampIcon.innerHTML = '<i data-lucide="trophy" style="width: 20px; height: 20px;"></i>';
         stampText.textContent = 'バッジ獲得済み！';
         stampStatus.classList.add('obtained');
         document.body.classList.add('town-completed');
     } else {
-        stampIcon.textContent = '🪙';
+        stampIcon.innerHTML = '<i data-lucide="circle-dot" style="width: 20px; height: 20px;"></i>';
         stampText.textContent = 'バッジ未取得';
         stampStatus.classList.remove('obtained');
         document.body.classList.remove('town-completed');
+    }
+    
+    // Lucideアイコンを初期化
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
     }
 }
 
