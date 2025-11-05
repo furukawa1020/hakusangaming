@@ -204,15 +204,16 @@ function forceBadgeIconUpdate() {
     
     logger.log('Force updating badge icons...', stamps);
     
+    // Lucideアイコン名マッピング
     const gymBadgeIcons = {
-        'tsurugi': '🏹',     // クレインバッジ (弓矢)
-        'mikawa': '🎺',      // ラッパバッジ (ラッパ)
-        'mattou': '🌲',      // パインバッジ (松)
-        'kawachi': '🌉',     // ブリッジバッジ (橋)
-        'shiramine': '⛰️',    // ピークバッジ (山頂)
-        'yoshinodani': '🌳', // フォレストバッジ (森)
-        'torigoe': '🏰',     // キャッスルバッジ (城)
-        'oguchi': '💧'       // フォールバッジ (滝)
+        'tsurugi': 'sword',        // クレインバッジ (剣)
+        'mikawa': 'music',         // ラッパバッジ (音楽)
+        'mattou': 'tree-pine',     // パインバッジ (松)
+        'kawachi': 'bridge',       // ブリッジバッジ (橋)
+        'shiramine': 'mountain-snow', // ピークバッジ (雪山)
+        'yoshinodani': 'trees',    // フォレストバッジ (森)
+        'torigoe': 'castle',       // キャッスルバッジ (城)
+        'oguchi': 'droplet'        // フォールバッジ (滝)
     };
     
     // 全ての町をチェック
@@ -228,16 +229,21 @@ function forceBadgeIconUpdate() {
         
         badgeIcons.forEach(badgeIcon => {
             if (stamps.includes(townCode)) {
-                // 取得済みの場合は専用アイコン
-                const newIcon = gymBadgeIcons[townCode] || '🏆';
-                badgeIcon.textContent = newIcon;
-                logger.log(`Updated ${townCode} to ${newIcon}`);
+                // 取得済みの場合はLucideアイコン
+                const iconName = gymBadgeIcons[townCode] || 'trophy';
+                badgeIcon.innerHTML = `<i data-lucide="${iconName}" style="width: 24px; height: 24px;"></i>`;
+                logger.log(`Updated ${townCode} to ${iconName}`);
             } else {
                 // 未取得の場合は？マーク
                 badgeIcon.textContent = '？';
                 logger.log(`Reset ${townCode} to ？`);
             }
         });
+        
+        // Lucideアイコンを再初期化
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
     });
 }
 
