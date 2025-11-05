@@ -32,7 +32,7 @@
         <!-- PWAインストールボタン -->
         <div class="pwa-install-section" id="pwaInstallSection">
             <button class="pwa-install-btn" id="pwaInstallBtn" onclick="installPWA()">
-                <img src="icons/ui/mobile.svg" alt="モバイル" class="icon-inline"> アプリとしてインストール
+                <i data-lucide="smartphone" style="width: 16px; height: 16px;"></i> アプリとしてインストール
             </button>
         </div>
     </header>
@@ -198,7 +198,7 @@
             </div>
         </div>        <div class="complete-section" id="completeSection" style="display: none;">
             <div class="complete-card">
-                <h2><img src="icons/rewards/trophy.svg" alt="トロフィー" class="icon-large"> ハクサンリーグチャンピオン！ <img src="icons/rewards/trophy.svg" alt="トロフィー" class="icon-large"></h2>
+                <h2><i data-lucide="trophy" style="width: 32px; height: 32px;"></i> ハクサンリーグチャンピオン！ <i data-lucide="trophy" style="width: 32px; height: 32px;"></i></h2>
                 <p>全8つのジムバッジをコンプリートしました！</p>
                 <button class="complete-btn" onclick="showSpecialContent()">殿堂入りする</button>
             </div>
@@ -216,47 +216,47 @@
             
             <!-- Completion Rewards -->
             <div class="rewards-container">
-                <h3 style="text-align: center; color: #2c3e50; margin-bottom: 1.5rem;"><img src="icons/rewards/gift.svg" alt="ギフト" class="icon"> 獲得報酬</h3>
+                <h3 style="text-align: center; color: #2c3e50; margin-bottom: 1.5rem;"><i data-lucide="gift" style="width: 24px; height: 24px;"></i> 獲得報酬</h3>
                 <div class="rewards-grid">
                     <div class="reward-item" data-required="2">
-                        <div class="reward-icon"><img src="icons/rewards/sticker.svg" alt="ステッカー" class="icon-xl"></div>
+                        <div class="reward-icon"><i data-lucide="sticker" style="width: 48px; height: 48px;"></i></div>
                         <div class="reward-name">限定ステッカー</div>
-                        <div class="reward-status"><img src="icons/ui/lock.svg" alt="ロック" class="icon-inline"> 2個で解放</div>
+                        <div class="reward-status"><i data-lucide="lock" style="width: 16px; height: 16px;"></i> 2個で解放</div>
                     </div>
                     <div class="reward-item" data-required="4">
-                        <div class="reward-icon"><img src="icons/rewards/towel.svg" alt="タオル" class="icon-xl"></div>
+                        <div class="reward-icon"><i data-lucide="shirt" style="width: 48px; height: 48px;"></i></div>
                         <div class="reward-name">オリジナルタオル</div>
-                        <div class="reward-status"><img src="icons/ui/lock.svg" alt="ロック" class="icon-inline"> 4個で解放</div>
+                        <div class="reward-status"><i data-lucide="lock" style="width: 16px; height: 16px;"></i> 4個で解放</div>
                     </div>
                     <div class="reward-item" data-required="8">
-                        <div class="reward-icon"><img src="icons/rewards/tshirt.svg" alt="Tシャツ" class="icon-xl"></div>
+                        <div class="reward-icon"><i data-lucide="shirt" style="width: 48px; height: 48px;"></i></div>
                         <div class="reward-name">特製Tシャツ</div>
-                        <div class="reward-status"><img src="icons/ui/lock.svg" alt="ロック" class="icon-inline"> 全制覇で解放</div>
+                        <div class="reward-status"><i data-lucide="lock" style="width: 16px; height: 16px;"></i> 全制覇で解放</div>
                     </div>
                     <div class="reward-item" data-required="8">
-                        <div class="reward-icon"><img src="icons/rewards/trophy.svg" alt="トロフィー" class="icon-xl"></div>
+                        <div class="reward-icon"><i data-lucide="award" style="width: 48px; height: 48px;"></i></div>
                         <div class="reward-name">チャンピオン認定証</div>
-                        <div class="reward-status"><img src="icons/ui/lock.svg" alt="ロック" class="icon-inline"> 全制覇で解放</div>
+                        <div class="reward-status"><i data-lucide="lock" style="width: 16px; height: 16px;"></i> 全制覇で解放</div>
                     </div>
                 </div>
             </div>
             
             <!-- Secret Content Area -->
             <div class="secret-content" data-content-id="hot_springs">
-                <h3><img src="icons/tourism/cherry-blossom.svg" alt="桜" class="icon"> 隠された温泉マップ</h3>
+                <h3><i data-lucide="sparkles" style="width: 24px; height: 24px;"></i> 隠された温泉マップ</h3>
                 <div class="locked-content">
                     <p>このコンテンツは1個目のバッジ獲得で解放されます。白山の秘湯スポットガイドをゲット！</p>
                 </div>
                 <div class="unlocked-content" style="display: none;">
-                    <h4><img src="icons/tourism/mountain.svg" alt="山" class="icon"> 白山麓の温泉</h4>
+                    <h4><i data-lucide="mountain" style="width: 20px; height: 20px;"></i> 白山麓の温泉</h4>
                     <ul style="text-align: left; padding-left: 2rem;">
                         <li><strong>白峰温泉総湯</strong> - 白山登山の疲れを癒す天然温泉</li>
                         <li><strong>一里野温泉</strong> - 標高約650mの高原温泉</li>
                         <li><strong>白山一里野温泉スキー場</strong> - スキーと温泉が楽しめる</li>
                     </ul>
-                    <p><small><img src="icons/tourism/lightbulb.svg" alt="ヒント" class="icon-inline"> ヒント: 温泉情報は各地区の観光案内所でお尋ねください</small></p>
+                    <p><small><i data-lucide="lightbulb" style="width: 14px; height: 14px;"></i> ヒント: 温泉情報は各地区の観光案内所でお尋ねください</small></p>
                 </div>
-                <div class="unlock-requirement"><img src="icons/ui/lock.svg" alt="ロック" class="icon-inline"> 解放条件: 初回バッジ獲得</div>
+                <div class="unlock-requirement"><i data-lucide="lock" style="width: 16px; height: 16px;"></i> 解放条件: 初回バッジ獲得</div>
             </div>
             
             <div class="secret-content" data-content-id="legend_story">
