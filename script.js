@@ -189,11 +189,11 @@ function forceBadgeIconUpdate() {
                 // 取得済みの場合は専用アイコン
                 const newIcon = gymBadgeIcons[townCode] || '🏆';
                 badgeIcon.textContent = newIcon;
-                console.log(`Updated ${townCode} to ${newIcon}`);
+                logger.log(`Updated ${townCode} to ${newIcon}`);
             } else {
                 // 未取得の場合は？マーク
                 badgeIcon.textContent = '？';
-                console.log(`Reset ${townCode} to ？`);
+                logger.log(`Reset ${townCode} to ？`);
             }
         });
     });
