@@ -253,7 +253,7 @@ function updateStampDisplay() {
         const stampStatus = document.getElementById(`stamp-${townCode}`);
         
         if (!townCard) {
-            console.warn(`Town card not found for: ${townCode}`);
+            logger.warn(`Town card not found for: ${townCode}`);
             return;
         }
         
@@ -264,7 +264,7 @@ function updateStampDisplay() {
             badgeIcon = townCard.querySelector('.badge-icon, .gym-badge, [class*="badge"]');
         }
         
-        console.log(`Updating ${townCode}: card found=${!!townCard}, icon found=${!!badgeIcon}, completed=${stamps.includes(townCode)}`);
+        logger.log(`Updating ${townCode}: card found=${!!townCard}, icon found=${!!badgeIcon}, completed=${stamps.includes(townCode)}`);
         
         if (stamps.includes(townCode)) {
             // バッジ取得済みの場合
@@ -291,9 +291,9 @@ function updateStampDisplay() {
                 badgeIcon.textContent = newIcon;
                 badgeIcon.innerHTML = newIcon; // HTMLも設定（万が一のため）
                 
-                console.log(`Badge icon updated for ${townCode}: ${newIcon}`);
+                logger.log(`Badge icon updated for ${townCode}: ${newIcon}`);
             } else {
-                console.error(`Badge icon element not found for ${townCode}`);
+                logger.error(`Badge icon element not found for ${townCode}`);
             }
         } else {
             // バッジ未取得の場合
@@ -307,7 +307,7 @@ function updateStampDisplay() {
             if (badgeIcon) {
                 badgeIcon.textContent = '？';
                 badgeIcon.innerHTML = '？'; // HTMLも設定（万が一のため）
-                console.log(`Badge icon reset for ${townCode}: ？`);
+                logger.log(`Badge icon reset for ${townCode}: ？`);
             }
         }
     });
@@ -982,9 +982,9 @@ function resetAllBadgesWithConfirm() {
 
 // デバッグ用：特定のバッジをテスト追加
 function testBadgeUpdate(townCode) {
-    console.log(`Testing badge update for: ${townCode}`);
+    logger.log(`Testing badge update for: ${townCode}`);
     addStamp(townCode);
-    console.log('Current badges:', getStamps());
+    logger.log('Current badges:', getStamps());
 }
 
 // デバッグ用：現在の状態をチェック
