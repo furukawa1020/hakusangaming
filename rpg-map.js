@@ -98,14 +98,14 @@ class RPGMapController {
         legendaryElement.className = 'legendary-pokemon';
         legendaryElement.style.left = '52%';
         legendaryElement.style.top = '8%';
-        legendaryElement.innerHTML = '🐉';
+        legendaryElement.innerHTML = '<i data-lucide="dragon" style="width: 32px; height: 32px;"></i>';
         legendaryElement.onclick = () => this.interactWithLegendary();
         
         // 宝箱（隠された場所）
         const treasureElements = [
-            { x: 25, y: 45, emoji: '💎' },
-            { x: 80, y: 25, emoji: '🏆' },
-            { x: 65, y: 75, emoji: '⭐' }
+            { x: 25, y: 45, icon: 'gem' },
+            { x: 80, y: 25, icon: 'trophy' },
+            { x: 65, y: 75, icon: 'star' }
         ];
         
         treasureElements.forEach((treasure, index) => {
@@ -113,16 +113,21 @@ class RPGMapController {
             treasureElement.className = 'treasure-chest';
             treasureElement.style.left = `${treasure.x}%`;
             treasureElement.style.top = `${treasure.y}%`;
-            treasureElement.innerHTML = treasure.emoji;
+            treasureElement.innerHTML = `<i data-lucide="${treasure.icon}" style="width: 24px; height: 24px;"></i>`;
             treasureElement.onclick = () => this.collectTreasure(index);
             this.mapContainer.appendChild(treasureElement);
         });
         
+        // Lucideアイコンを初期化
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+        
         // 野生のポケモン
         const wildPokemonElements = [
-            { x: 30, y: 30, emoji: '🦅' },
-            { x: 85, y: 50, emoji: '🐻' },
-            { x: 40, y: 60, emoji: '🐟' }
+            { x: 30, y: 30, icon: 'bird' },
+            { x: 85, y: 50, icon: 'circle' },
+            { x: 40, y: 60, icon: 'fish' }
         ];
         
         wildPokemonElements.forEach((pokemon, index) => {
@@ -130,10 +135,15 @@ class RPGMapController {
             pokemonElement.className = 'wild-pokemon';
             pokemonElement.style.left = `${pokemon.x}%`;
             pokemonElement.style.top = `${pokemon.y}%`;
-            pokemonElement.innerHTML = pokemon.emoji;
+            pokemonElement.innerHTML = `<i data-lucide="${pokemon.icon}" style="width: 20px; height: 20px;"></i>`;
             pokemonElement.onclick = () => this.encounterWildPokemon(index);
             this.mapContainer.appendChild(pokemonElement);
         });
+        
+        // Lucideアイコンを初期化
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
         
         this.mapContainer.appendChild(legendaryElement);
     }
