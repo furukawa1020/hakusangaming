@@ -1,5 +1,8 @@
 // RPG Map JavaScript for Hakusan League Gym Badge Quest
 
+// Time Update Interval Constant
+const TIME_UPDATE_INTERVAL_MS = 60000; // 1分ごとに更新
+
 // Security utilities
 const SecurityUtils = {
     safeJSONParse(data, defaultValue = null) {
@@ -224,7 +227,7 @@ class RPGMapController {
         };
         
         updateTime();
-        setInterval(updateTime, 60000); // 1分ごとに更新
+        setInterval(updateTime, TIME_UPDATE_INTERVAL_MS); // 1分ごとに更新
     }
 
     applySeasonalEffects() {

@@ -13,6 +13,8 @@ const EFFECT_DURATION = {
     TOAST: 500
 };
 
+const OFFER_AUTO_CLOSE_MS = 30000; // 30秒 - オファー自動削除
+
 // Debug logger
 const logger = {
     log: (...args) => DEBUG_MODE && console.log(...args),
@@ -654,7 +656,7 @@ class MarketingEffects {
         // 30秒後に自動削除
         setTimeout(() => {
             if (offer.parentElement) offer.remove();
-        }, 30000);
+        }, OFFER_AUTO_CLOSE_MS);
         
         if (!document.querySelector('#offer-animations')) {
             const style = document.createElement('style');
