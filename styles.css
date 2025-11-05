@@ -1047,3 +1047,29 @@ footer {
         font-size: 1.5rem;
     }
 }
+
+/* Icon Styles */
+.icon {
+    display: inline-block;
+    width: 1.2em;
+    height: 1.2em;
+    vertical-align: middle;
+    margin: 0 0.2em;
+}
+
+.icon-inline {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: text-bottom;
+}
+
+.icon-large {
+    width: 2em;
+    height: 2em;
+}
+
+.icon-xl {
+    width: 3em;
+    height: 3em;
+}
