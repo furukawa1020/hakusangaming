@@ -1,3 +1,21 @@
+// Configuration
+const DEBUG_MODE = false; // 本番環境ではfalseに設定
+
+// Timing Constants
+const TIMING = {
+    BADGE_UPDATE_RETRY_1: 200,
+    BADGE_UPDATE_RETRY_2: 500,
+    BADGE_UPDATE_RETRY_3: 1000,
+    BADGE_UPDATE_DELAY: 200
+};
+
+// Debug logger (本番環境では無効化)
+const logger = {
+    log: (...args) => DEBUG_MODE && console.log(...args),
+    warn: (...args) => DEBUG_MODE && console.warn(...args),
+    error: (...args) => console.error(...args) // エラーは常に出力
+};
+
 // Town data
 const towns = {
     tsurugi: '鶴来',
@@ -16,7 +34,7 @@ let isInstallPromptAvailable = false;
 
 // PWA Install Event Listeners
 window.addEventListener('beforeinstallprompt', (e) => {
-    console.log('📱 PWAインストールプロンプト検出');
+    logger.log('📱 PWAインストールプロンプト検出');
     e.preventDefault();
     deferredPrompt = e;
     isInstallPromptAvailable = true;
@@ -24,7 +42,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 });
 
 window.addEventListener('appinstalled', () => {
-    console.log('✅ PWAアプリがインストールされました');
+    logger.log('✅ PWAアプリがインストールされました');
     hideInstallButton();
     deferredPrompt = null;
     isInstallPromptAvailable = false;
@@ -47,7 +65,7 @@ function hideInstallButton() {
 
 async function installPWA() {
     if (!deferredPrompt) {
-        console.log('❌ インストールプロンプトが利用できません');
+        logger.log('❌ インストールプロンプトが利用できません');
         return;
     }
 
@@ -59,12 +77,12 @@ async function installPWA() {
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
         
-        console.log(`🔔 ユーザーの選択: ${outcome}`);
+        logger.log(`🔔 ユーザーの選択: ${outcome}`);
         
         if (outcome === 'accepted') {
-            console.log('✅ ユーザーがPWAインストールを承認');
+            logger.log('✅ ユーザーがPWAインストールを承認');
         } else {
-            console.log('❌ ユーザーがPWAインストールを拒否');
+            logger.log('❌ ユーザーがPWAインストールを拒否');
             installBtn.disabled = false;
             installBtn.textContent = '📱 アプリとしてインストール';
         }
@@ -72,7 +90,7 @@ async function installPWA() {
         deferredPrompt = null;
         isInstallPromptAvailable = false;
     } catch (error) {
-        console.error('❌ PWAインストールエラー:', error);
+        logger.error('❌ PWAインストールエラー:', error);
         const installBtn = document.getElementById('pwaInstallBtn');
         installBtn.disabled = false;
         installBtn.textContent = '📱 アプリとしてインストール';
@@ -121,9 +139,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         // 確実にバッジアイコンが表示されるように（複数回実行）
         forceBadgeIconUpdate();
-        setTimeout(() => forceBadgeIconUpdate(), 200);
-        setTimeout(() => forceBadgeIconUpdate(), 500);
-        setTimeout(() => forceBadgeIconUpdate(), 1000);
+        setTimeout(() => forceBadgeIconUpdate(), TIMING.BADGE_UPDATE_RETRY_1);
+        setTimeout(() => forceBadgeIconUpdate(), TIMING.BADGE_UPDATE_RETRY_2);
+        setTimeout(() => forceBadgeIconUpdate(), TIMING.BADGE_UPDATE_RETRY_3);
     }, 500);
     
     // DOMが完全にロードされた後も再実行
@@ -142,7 +160,7 @@ function getStamps() {
 function forceBadgeIconUpdate() {
     const stamps = getStamps();
     
-    console.log('Force updating badge icons...', stamps);
+    logger.log('Force updating badge icons...', stamps);
     
     const gymBadgeIcons = {
         'tsurugi': '🏹',     // クレインバッジ (弓矢)
@@ -159,7 +177,7 @@ function forceBadgeIconUpdate() {
     Object.keys(towns).forEach(townCode => {
         const townCard = document.querySelector(`[data-town="${townCode}"]`);
         if (!townCard) {
-            console.warn(`Town card not found: ${townCode}`);
+            logger.warn(`Town card not found: ${townCode}`);
             return;
         }
         
@@ -208,7 +226,7 @@ function addStamp(townCode) {
         // 確実にバッジアイコンを更新
         setTimeout(() => {
             forceBadgeIconUpdate();
-        }, 200);
+        }, TIMING.BADGE_UPDATE_DELAY);
         
         return true;
     }
