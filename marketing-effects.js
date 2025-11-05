@@ -393,7 +393,7 @@ class MarketingEffects {
                 width: 90%;
                 text-align: center;
             ">
-                <h3>🌟 体験レビューを投稿</h3>
+                <h3><i data-lucide="star" style="width: 20px; height: 20px;"></i> 体験レビューを投稿</h3>
                 <p>あなたの白山市体験を他の観光客にシェアしてください！</p>
                 <div style="margin: 1rem 0;">
                     <button onclick="window.open('https://www.google.com/search?q=白山市+観光+レビュー', '_blank')" 
@@ -494,7 +494,7 @@ class MarketingEffects {
         let membersList = '';
         groupProgress.members.forEach((member, index) => {
             membersList += `<div style="margin: 0.5rem 0; padding: 0.5rem; background: rgba(0,0,0,0.2); border-radius: 5px;">
-                ${member.name}: ${member.badges.length}/8 🏆
+                ${member.name}: ${member.badges.length}/8 <i data-lucide="trophy" style="width: 16px; height: 16px;"></i>
             </div>`;
         });
         
@@ -592,7 +592,7 @@ class MarketingEffects {
         `;
         
         bonusModal.innerHTML = `
-            <h3>🎖️ リピーター特典！</h3>
+            <h3><i data-lucide="award" style="width: 20px; height: 20px;"></i> リピーター特典！</h3>
             <p>${visitCount}回目の訪問ありがとうございます！</p>
             <p>特典：道の駅での10%割引クーポン</p>
             <button onclick="this.parentElement.remove()" style="
