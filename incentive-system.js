@@ -10,13 +10,7 @@ const ANIMATION_TIMING = {
     CONFETTI_DURATION: 3000
 };
 
-// Incentive System for Hakusan League Gym Badge Rally
-// Version 1.0.0
-
-// Configuration
-const DEBUG_MODE = false; // 本番環境ではfalseに設定
-
-// Constants
+// Update Interval Constants
 const UPDATE_INTERVAL_MS = 30000; // 30秒 - ライブ統計更新間隔
 
 // Dependencies: Requires SecurityUtils from script.js
@@ -323,7 +317,7 @@ class IncentiveSystem {
     
     startLiveCounter() {
         this.updateLiveStats();
-        setInterval(() => this.updateLiveStats(), 30000); // Update every 30 seconds
+        setInterval(() => this.updateLiveStats(), UPDATE_INTERVAL_MS); // Update every 30 seconds
     }
 
     updateLiveStats() {
