@@ -346,21 +346,22 @@ async function createOfflinePage() {
                 font-weight: bold;
             }
         </style>
+        <script src="https://unpkg.com/lucide@latest"></script>
     </head>
     <body>
         <div class="offline-container">
-            <div class="offline-icon">🏔️</div>
+            <div class="offline-icon"><i data-lucide="mountain" style="width: 80px; height: 80px;"></i></div>
             <h1>オフラインモード</h1>
             <p>
                 インターネット接続が利用できません。<br>
                 キャッシュされたデータを使用して、一部の機能をご利用いただけます。
             </p>
             <button class="retry-btn" onclick="window.location.reload()">
-                🔄 再試行
+                <i data-lucide="refresh-cw" style="width: 16px; height: 16px;"></i> 再試行
             </button>
             
             <div class="cached-data">
-                <h3>📱 利用可能な機能</h3>
+                <h3><i data-lucide="smartphone" style="width: 20px; height: 20px;"></i> 利用可能な機能</h3>
                 <p>
                     • 獲得済みバッジの確認<br>
                     • ジムマップの表示<br>
@@ -379,6 +380,11 @@ async function createOfflinePage() {
                 document.getElementById('offlineBadgeCount').textContent = 'バッジ: ' + badges.length + '/8';
             } catch (e) {
                 console.log('Failed to load badge data');
+            }
+            
+            // Lucideアイコンを初期化
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
             }
         </script>
     </body>
