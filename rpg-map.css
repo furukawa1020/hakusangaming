@@ -432,6 +432,10 @@
     filter: drop-shadow(0 0 10px #FFD700);
 }
 
+.gym-building.completed .gym-badge img {
+    filter: drop-shadow(0 0 10px #FFD700) brightness(1.2);
+}
+
 /* ジム情報表示 */
 .gym-info {
     text-align: center;

@@ -44,6 +44,15 @@ const STATIC_FILES = [
   '/rpg-map.js',
   '/manifest.json',
   '/白山.png',
+  // Badge images
+  '/icons/badge-oguchi.png',
+  '/icons/badge-kawachi.png',
+  '/icons/badge-mattou.png',
+  '/icons/badge-mikawa.png',
+  '/icons/badge-shiramine.png',
+  '/icons/badge-torigoe.png',
+  '/icons/badge-tsurugi.png',
+  '/icons/badge-yoshinodani.png',
   // タウンファイル
   '/town/tsurugi.html',
   '/town/mikawa.html',
