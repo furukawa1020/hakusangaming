@@ -22,14 +22,14 @@ const SecurityUtils = {
 class RPGMapController {
     constructor() {
         this.gyms = {
-            'oguchi': { name: '尾口', type: 'fairy', icon: '🧚‍♀️', completed: false },
-            'kawachi': { name: '河内', type: 'water', icon: '🌊', completed: false },
-            'mattou': { name: '松任', type: 'normal', icon: '⭐', completed: false },
-            'mikawa': { name: '美川', type: 'ground', icon: '🌍', completed: false },
-            'shiramine': { name: '白峰', type: 'ice', icon: '❄️', completed: false },
-            'torigoe': { name: '鳥越', type: 'grass', icon: '🌿', completed: false },
-            'tsurugi': { name: '鶴来', type: 'fighting', icon: '⚔️', completed: false },
-            'yoshinodani': { name: '吉野谷', type: 'water', icon: '💧', completed: false }
+            'oguchi': { name: '尾口', type: 'fairy', icon: '🧚‍♀️', badgeImage: 'icons/badge-oguchi.png', completed: false },
+            'kawachi': { name: '河内', type: 'water', icon: '🌊', badgeImage: 'icons/badge-kawachi.png', completed: false },
+            'mattou': { name: '松任', type: 'normal', icon: '⭐', badgeImage: 'icons/badge-mattou.png', completed: false },
+            'mikawa': { name: '美川', type: 'ground', icon: '🌍', badgeImage: 'icons/badge-mikawa.png', completed: false },
+            'shiramine': { name: '白峰', type: 'ice', icon: '❄️', badgeImage: 'icons/badge-shiramine.png', completed: false },
+            'torigoe': { name: '鳥越', type: 'grass', icon: '🌿', badgeImage: 'icons/badge-torigoe.png', completed: false },
+            'tsurugi': { name: '鶴来', type: 'fighting', icon: '⚔️', badgeImage: 'icons/badge-tsurugi.png', completed: false },
+            'yoshinodani': { name: '吉野谷', type: 'water', icon: '💧', badgeImage: 'icons/badge-yoshinodani.png', completed: false }
         };
         
         this.badges = [];
@@ -82,7 +82,9 @@ class RPGMapController {
                     <div class="gym-roof ${gym.type}-roof"></div>
                     <div class="gym-walls ${gym.type}-walls"></div>
                     <div class="gym-door"></div>
-                    <div class="gym-badge">${gym.icon}</div>
+                    <div class="gym-badge">
+                        <img src="${gym.badgeImage}" alt="${gym.name}バッジ" onerror="this.style.display='none'; this.parentElement.textContent='${gym.icon}';" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
                 </div>
                 <div class="gym-info">
                     <span class="gym-name">${gym.name}ジム</span>

@@ -402,6 +402,13 @@
     transition: all 0.3s ease;
 }
 
+.gym-badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
 .gym-glow {
     position: absolute;
     top: -5px;
