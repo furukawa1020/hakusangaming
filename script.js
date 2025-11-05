@@ -119,9 +119,17 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.incentiveSystem) {
             updateIncentiveContent();
         }
-        // 確実にバッジアイコンが表示されるように
+        // 確実にバッジアイコンが表示されるように（複数回実行）
         forceBadgeIconUpdate();
+        setTimeout(() => forceBadgeIconUpdate(), 200);
+        setTimeout(() => forceBadgeIconUpdate(), 500);
+        setTimeout(() => forceBadgeIconUpdate(), 1000);
     }, 500);
+    
+    // DOMが完全にロードされた後も再実行
+    window.addEventListener('load', () => {
+        forceBadgeIconUpdate();
+    });
 });
 
 // Get stamps from localStorage

@@ -30,15 +30,23 @@ class IncentiveSystem {
             'all_badges': '伝説のフォトスポット解放'
         };
         
+        this.limitedEvents = [];  // 追加：期間限定イベント配列
+        
         this.init();
     }
 
     init() {
         this.loadStats();
         this.loadAchievements();
+        this.loadUnlockedContent();  // 追加：保存されたアンロックコンテンツを読み込む
         this.startLiveCounter();
         this.setupEventListeners();
         this.createPermanentUI();
+        
+        // 初期化後すぐにコンテンツ表示を更新
+        setTimeout(() => {
+            this.updateSecretContentDisplay();
+        }, 100);
     }
 
     // ===========================================
@@ -584,6 +592,38 @@ class IncentiveSystem {
             const contentId = element.dataset.contentId;
             if (contentId && this.unlockedContent.includes(contentId)) {
                 element.classList.add('unlocked');
+                
+                // ロックコンテンツを非表示、アンロックコンテンツを表示
+                const lockedContent = element.querySelector('.locked-content');
+                const unlockedContent = element.querySelector('.unlocked-content');
+                const unlockRequirement = element.querySelector('.unlock-requirement');
+                
+                if (lockedContent) {
+                    lockedContent.style.display = 'none';
+                }
+                if (unlockedContent) {
+                    unlockedContent.style.display = 'block';
+                }
+                if (unlockRequirement) {
+                    unlockRequirement.style.display = 'none';
+                }
+            } else {
+                element.classList.remove('unlocked');
+                
+                // ロックコンテンツを表示、アンロックコンテンツを非表示
+                const lockedContent = element.querySelector('.locked-content');
+                const unlockedContent = element.querySelector('.unlocked-content');
+                const unlockRequirement = element.querySelector('.unlock-requirement');
+                
+                if (lockedContent) {
+                    lockedContent.style.display = 'block';
+                }
+                if (unlockedContent) {
+                    unlockedContent.style.display = 'none';
+                }
+                if (unlockRequirement) {
+                    unlockRequirement.style.display = 'block';
+                }
             }
         });
     }
