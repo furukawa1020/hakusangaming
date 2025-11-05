@@ -668,7 +668,7 @@ class MarketingEffects {
         
         setTimeout(() => {
             toast.style.animation = 'toastSlide 0.5s ease reverse';
-            setTimeout(() => toast.remove(), 500);
+            setTimeout(() => toast.remove(), EFFECT_DURATION.TOAST);
         }, 3000);
         
         if (!document.querySelector('#toast-animations')) {
