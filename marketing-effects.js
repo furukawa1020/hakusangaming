@@ -647,7 +647,7 @@ class MarketingEffects {
         `;
         
         offer.addEventListener('click', () => {
-            alert('詳細は最寄りの道の駅でお尋ねください！');
+            showNotification('詳細は最寄りの道の駅でお尋ねください！', 'info');
             offer.remove();
         });
         

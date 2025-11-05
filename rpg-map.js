@@ -520,7 +520,7 @@ class RPGMapController {
     }
 
     resetProgress() {
-        if (confirm('本当に進行状況をリセットしますか？')) {
+        showConfirmModal('本当に進行状況をリセットしますか？', () => {
             localStorage.removeItem('hakusan_badges');
             this.badges = [];
             Object.keys(this.gyms).forEach(gymId => {
@@ -528,8 +528,8 @@ class RPGMapController {
             });
             this.updateDisplay();
             this.updateGymBuildings();
-            this.showMessage('進行状況をリセットしました。', 'info');
-        }
+            showNotification('進行状況をリセットしました', 'success');
+        });
     }
 
     loadProgress() {

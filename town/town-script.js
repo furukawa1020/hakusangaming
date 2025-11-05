@@ -316,12 +316,12 @@ function suggestNextTown() {
             oguchi: '尾口'
         };
         
-        if (confirm(`次は${townNames[randomTown]}を訪れてみませんか？`)) {
+        showConfirmModal(`次は${townNames[randomTown]}を訪れてみませんか？`, () => {
             window.location.href = `${randomTown}.html`;
-        }
+        });
     } else {
-        alert('すべての町を訪れました！トップページで特別コンテンツをお楽しみください。');
-        goBack();
+        showNotification('すべての町を訪れました！トップページで特別コンテンツをお楽しみください。', 'success');
+        setTimeout(() => goBack(), 2000);
     }
 }
 
