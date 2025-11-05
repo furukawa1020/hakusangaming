@@ -1,6 +1,22 @@
 // Advanced Incentive System for Hakusan Badge Quest
 // 観光客爆売れシステム
 
+// Configuration
+const DEBUG_MODE = false; // 本番環境ではfalseに設定
+
+// Animation Timing Constants
+const ANIMATION_TIMING = {
+    POPUP_CLOSE: 500,
+    CONFETTI_DURATION: 3000
+};
+
+// Debug logger
+const logger = {
+    log: (...args) => DEBUG_MODE && console.log(...args),
+    warn: (...args) => DEBUG_MODE && console.warn(...args),
+    error: (...args) => console.error(...args)
+};
+
 class IncentiveSystem {
     constructor() {
         this.achievements = [];

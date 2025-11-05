@@ -1,6 +1,25 @@
 // Special Effects and Marketing Features
 // 観光客爆売れのための特別エフェクト
 
+// Configuration
+const DEBUG_MODE = false; // 本番環境ではfalseに設定
+
+// Animation Timing Constants
+const EFFECT_DURATION = {
+    FIREWORK: 1000,
+    GLOW: 2000,
+    LEGENDARY: 3000,
+    SPARKLE: 2000,
+    TOAST: 500
+};
+
+// Debug logger
+const logger = {
+    log: (...args) => DEBUG_MODE && console.log(...args),
+    warn: (...args) => DEBUG_MODE && console.warn(...args),
+    error: (...args) => console.error(...args)
+};
+
 class MarketingEffects {
     constructor() {
         this.init();
@@ -57,7 +76,7 @@ class MarketingEffects {
                 `;
                 
                 document.body.appendChild(firework);
-                setTimeout(() => firework.remove(), 1000);
+                setTimeout(() => firework.remove(), EFFECT_DURATION.FIREWORK);
             }, i * 100);
         }
         
