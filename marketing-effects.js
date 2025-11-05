@@ -536,11 +536,8 @@ class MarketingEffects {
     }
     
     getLocalBadges() {
-        const saved = localStorage.getItem('hakusan_badges');
-        if (!saved) return [];
-        
-        const parsed = SecurityUtils.safeJSONParse(saved, []);
-        return Array.isArray(parsed) ? parsed : [];
+        // script.jsのSecurityUtils.getBadges()を使用
+        return window.SecurityUtils ? window.SecurityUtils.getBadges() : [];
     }
     
     updateGroupProgress() {

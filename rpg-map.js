@@ -515,16 +515,16 @@ class RPGMapController {
     }
 
     loadProgress() {
-        const saved = localStorage.getItem('hakusan_badges');
-        if (saved) {
-            this.badges = SecurityUtils.safeJSONParse(saved, []);
-            if (Array.isArray(this.badges)) {
-                this.badges.forEach(badge => {
-                    if (this.gyms[badge]) {
-                        this.gyms[badge].completed = true;
-                    }
-                });
-            }
+        // SecurityUtils.getBadges()を使用（グローバルから）
+        const badges = window.SecurityUtils ? window.SecurityUtils.getBadges() : [];
+        this.badges = badges;
+        
+        if (Array.isArray(this.badges)) {
+            this.badges.forEach(badge => {
+                if (this.gyms[badge]) {
+                    this.gyms[badge].completed = true;
+                }
+            });
         }
     }
 

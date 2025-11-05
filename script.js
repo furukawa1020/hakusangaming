@@ -44,6 +44,31 @@ const SecurityUtils = {
             /^[a-z]+$/.test(item) &&
             towns[item] !== undefined
         );
+    },
+
+    // 共通バッジ取得関数（グローバルで使用可能）
+    getBadges() {
+        const stamps = localStorage.getItem('hakusan_badges');
+        if (!stamps) return [];
+        
+        const parsed = this.safeJSONParse(stamps, []);
+        
+        if (!this.validateBadgeData(parsed)) {
+            logger.error('Invalid badge data detected, resetting');
+            localStorage.removeItem('hakusan_badges');
+            return [];
+        }
+        
+        return parsed;
+    },
+
+    // 共通バッジ保存関数
+    saveBadges(badges) {
+        if (this.validateBadgeData(badges)) {
+            localStorage.setItem('hakusan_badges', JSON.stringify(badges));
+            return true;
+        }
+        return false;
     }
 };
 
