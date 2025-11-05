@@ -800,10 +800,10 @@ function shareCompletion() {
         const text = `${shareText}\n${shareUrl}`;
         if (navigator.clipboard) {
             navigator.clipboard.writeText(text).then(() => {
-                alert('シェア用テキストをクリップボードにコピーしました！');
+                showNotification('シェア用テキストをクリップボードにコピーしました！', 'success');
             });
         } else {
-            alert(`シェア用テキスト：\n${text}`);
+            showNotification(`シェア用テキスト：\n${text}`, 'info');
         }
     }
 }
