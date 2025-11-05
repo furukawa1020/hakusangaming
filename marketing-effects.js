@@ -223,7 +223,7 @@ class MarketingEffects {
                 `;
                 
                 document.body.appendChild(sparkle);
-                setTimeout(() => sparkle.remove(), 2000);
+                setTimeout(() => sparkle.remove(), EFFECT_DURATION.SPARKLE);
             }, i * 200);
         }
         
@@ -274,7 +274,7 @@ class MarketingEffects {
                     }, index * 150);
                 });
             } catch (e) {
-                console.log('Audio context not available');
+                logger.log('Audio context not available');
             }
         }
     }
@@ -315,7 +315,7 @@ class MarketingEffects {
         
         // Web Share API対応チェック
         if (navigator.share) {
-            navigator.share(shareData).catch(err => console.log('Error sharing:', err));
+            navigator.share(shareData).catch(err => logger.error('Error sharing:', err));
         } else {
             // フォールバック：クリップボードにコピー
             navigator.clipboard.writeText(shareData.url).then(() => {
