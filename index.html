@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="incentive-system.css">
     
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
     <!-- Preload critical resources -->
     <link rel="preload" href="script.js" as="script">
     <link rel="preload" href="performance-config.js" as="script">
@@ -313,6 +316,11 @@
     <script src="incentive-system.js"></script>
     <script src="marketing-effects.js"></script>
     
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+    
     <!-- PWA Service Worker登録 -->
     <script>
         const DEBUG_MODE = false;
@@ -325,10 +333,10 @@
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
                     .then(registration => {
-                        logger.log('✅ PWA Service Worker登録成功:', registration.scope);
+                        logger.log('PWA Service Worker登録成功:', registration.scope);
                     })
                     .catch(error => {
-                        logger.error('❌ PWA Service Worker登録失敗:', error);
+                        logger.error('PWA Service Worker登録失敗:', error);
                     });
             });
         }
@@ -338,7 +346,7 @@
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            logger.log('📱 PWAインストール可能');
+            logger.log('PWAインストール可能');
         });
     </script>
 </body>
