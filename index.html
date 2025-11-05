@@ -297,7 +297,7 @@
     
     <!-- デバッグ用リセットボタン -->
     <div class="debug-section">
-        <button class="debug-reset-btn" onclick="resetAllBadgesWithConfirm()">🔄 全バッジリセット（デバッグ用）</button>
+        <button class="debug-reset-btn" onclick="resetAllBadgesWithConfirm()"><img src="icons/ui/unlock.svg" alt="リセット" class="icon-inline"> 全バッジリセット（デバッグ用）</button>
     </div>
     
     <footer>
@@ -310,14 +310,20 @@
     
     <!-- PWA Service Worker登録 -->
     <script>
+        const DEBUG_MODE = false;
+        const logger = {
+            log: (...args) => DEBUG_MODE && console.log(...args),
+            error: (...args) => console.error(...args)
+        };
+        
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
                     .then(registration => {
-                        console.log('✅ PWA Service Worker登録成功:', registration.scope);
+                        logger.log('✅ PWA Service Worker登録成功:', registration.scope);
                     })
                     .catch(error => {
-                        console.error('❌ PWA Service Worker登録失敗:', error);
+                        logger.error('❌ PWA Service Worker登録失敗:', error);
                     });
             });
         }
@@ -327,7 +333,7 @@
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            console.log('📱 PWAインストール可能');
+            logger.log('📱 PWAインストール可能');
         });
     </script>
 </body>
