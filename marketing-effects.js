@@ -379,7 +379,8 @@ class MarketingEffects {
 
     addGroupChallenge() {
         // グループ挑戦モード
-        if (localStorage.getItem('group_challenge_mode')) {
+        const groupMode = localStorage.getItem('group_challenge_mode');
+        if (groupMode === 'true') {
             this.showGroupProgress();
         }
         
@@ -411,7 +412,110 @@ class MarketingEffects {
         localStorage.setItem('group_challenge_mode', 'true');
         localStorage.setItem('group_id', groupId);
         
+        // グループ進捗を初期化
+        const groupProgress = {
+            groupId: groupId,
+            members: [{ name: 'あなた', badges: this.getLocalBadges() }],
+            createdAt: Date.now()
+        };
+        localStorage.setItem('group_progress', JSON.stringify(groupProgress));
+        
         this.showToast(`🎉 グループチャレンジ開始！\nグループID: ${groupId}\n友達にこのIDを教えてください。`);
+        
+        // グループ進捗パネルを表示
+        this.showGroupProgress();
+    }
+    
+    showGroupProgress() {
+        // 既存のパネルを削除
+        const existingPanel = document.querySelector('.group-progress-panel');
+        if (existingPanel) {
+            existingPanel.remove();
+        }
+        
+        const groupProgress = JSON.parse(localStorage.getItem('group_progress') || '{}');
+        if (!groupProgress.groupId) return;
+        
+        const panel = document.createElement('div');
+        panel.className = 'group-progress-panel';
+        panel.style.cssText = `
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(142, 68, 173, 0.95);
+            color: white;
+            padding: 1rem;
+            border-radius: 15px;
+            z-index: 999;
+            min-width: 200px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border: 2px solid #9b59b6;
+        `;
+        
+        let membersList = '';
+        groupProgress.members.forEach((member, index) => {
+            membersList += `<div style="margin: 0.5rem 0; padding: 0.5rem; background: rgba(0,0,0,0.2); border-radius: 5px;">
+                ${member.name}: ${member.badges.length}/8 🏆
+            </div>`;
+        });
+        
+        panel.innerHTML = `
+            <div style="font-weight: bold; margin-bottom: 0.5rem; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 0.5rem;">
+                👥 グループチャレンジ
+            </div>
+            <div style="font-size: 0.8rem; margin-bottom: 0.5rem;">
+                ID: ${groupProgress.groupId}
+            </div>
+            ${membersList}
+            <button onclick="marketingEffects.leaveGroupChallenge()" style="
+                background: rgba(231, 76, 60, 0.8);
+                color: white;
+                border: none;
+                padding: 0.5rem;
+                border-radius: 5px;
+                cursor: pointer;
+                width: 100%;
+                margin-top: 0.5rem;
+                font-size: 0.9rem;
+            ">退出する</button>
+        `;
+        
+        document.body.appendChild(panel);
+    }
+    
+    leaveGroupChallenge() {
+        if (confirm('グループチャレンジから退出しますか？')) {
+            localStorage.removeItem('group_challenge_mode');
+            localStorage.removeItem('group_id');
+            localStorage.removeItem('group_progress');
+            
+            const panel = document.querySelector('.group-progress-panel');
+            if (panel) panel.remove();
+            
+            this.showToast('グループチャレンジから退出しました');
+        }
+    }
+    
+    getLocalBadges() {
+        const saved = localStorage.getItem('hakusan_badges');
+        return saved ? JSON.parse(saved) : [];
+    }
+    
+    updateGroupProgress() {
+        // グループモードでない場合は何もしない
+        if (localStorage.getItem('group_challenge_mode') !== 'true') return;
+        
+        const groupProgress = JSON.parse(localStorage.getItem('group_progress') || '{}');
+        if (!groupProgress.groupId) return;
+        
+        // 自分の進捗を更新
+        const currentBadges = this.getLocalBadges();
+        groupProgress.members[0].badges = currentBadges;
+        
+        localStorage.setItem('group_progress', JSON.stringify(groupProgress));
+        
+        // パネルを再描画
+        this.showGroupProgress();
     }
 
     generateGroupId() {
@@ -595,5 +699,8 @@ window.addEventListener('badgeAcquired', (event) => {
     // 特別エフェクト発動
     if (window.marketingEffects) {
         window.marketingEffects.createBadgeAcquisitionEffect(gymId, rarity);
+        
+        // グループチャレンジの進捗を更新
+        window.marketingEffects.updateGroupProgress();
     }
 });

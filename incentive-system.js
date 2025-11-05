@@ -46,6 +46,7 @@ class IncentiveSystem {
         // 初期化後すぐにコンテンツ表示を更新
         setTimeout(() => {
             this.updateSecretContentDisplay();
+            this.checkLimitedEvents();  // 期間限定イベントチェック
         }, 100);
     }
 
@@ -310,7 +311,43 @@ class IncentiveSystem {
         
         if (startTime) {
             const elapsed = (Date.now() - parseInt(startTime)) / (1000 * 60);
-            elapsedTime = `${Math.round(elapsed)}分`;
+            if (elapsed < 60) {
+                elapsedTime = `${Math.round(elapsed)}分`;
+            } else if (elapsed < 1440) {
+                const hours = Math.floor(elapsed / 60);
+                const minutes = Math.round(elapsed % 60);
+                elapsedTime = `${hours}時間${minutes}分`;
+            } else {
+                const days = Math.floor(elapsed / 1440);
+                const hours = Math.floor((elapsed % 1440) / 60);
+                elapsedTime = `${days}日${hours}時間`;
+            }
+        } else {
+            // 初回訪問時にタイムスタンプを記録
+            localStorage.setItem('quest_start_time', Date.now().toString());
+            elapsedTime = '0分';
+        }
+        
+        // 推定完了時間を計算
+        let estimatedCompletion = '';
+        if (badges.length > 0 && badges.length < 8) {
+            const avgTimePerBadge = elapsed / badges.length;
+            const remainingBadges = 8 - badges.length;
+            const estimatedMinutes = Math.round(avgTimePerBadge * remainingBadges);
+            
+            if (estimatedMinutes < 60) {
+                estimatedCompletion = `<div class="stat-card">
+                    <div class="stat-number">約${estimatedMinutes}分</div>
+                    <div class="stat-label">完了まで予測</div>
+                </div>`;
+            } else {
+                const estHours = Math.floor(estimatedMinutes / 60);
+                const estMins = Math.round(estimatedMinutes % 60);
+                estimatedCompletion = `<div class="stat-card">
+                    <div class="stat-number">約${estHours}h${estMins}m</div>
+                    <div class="stat-label">完了まで予測</div>
+                </div>`;
+            }
         }
         
         return `
@@ -331,6 +368,7 @@ class IncentiveSystem {
                     <div class="stat-number">${this.achievements.length}</div>
                     <div class="stat-label">実績数</div>
                 </div>
+                ${estimatedCompletion}
             </div>
         `;
     }
