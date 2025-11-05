@@ -17,6 +17,24 @@ const logger = {
     error: (...args) => console.error(...args)
 };
 
+// Security utilities
+const SecurityUtils = {
+    safeJSONParse(data, fallback = null) {
+        try {
+            return JSON.parse(data);
+        } catch (e) {
+            logger.error('JSON parse error:', e);
+            return fallback;
+        }
+    },
+    
+    sanitizeHTML(str) {
+        const temp = document.createElement('div');
+        temp.textContent = str;
+        return temp.innerHTML;
+    }
+};
+
 class IncentiveSystem {
     constructor() {
         this.achievements = [];

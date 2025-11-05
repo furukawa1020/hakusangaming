@@ -16,6 +16,37 @@ const logger = {
     error: (...args) => console.error(...args) // エラーは常に出力
 };
 
+// Security utilities
+const SecurityUtils = {
+    // Safe JSON parse with validation
+    safeJSONParse(data, fallback = null) {
+        try {
+            const parsed = JSON.parse(data);
+            return parsed;
+        } catch (e) {
+            logger.error('JSON parse error:', e);
+            return fallback;
+        }
+    },
+    
+    // Sanitize HTML content to prevent XSS
+    sanitizeHTML(str) {
+        const temp = document.createElement('div');
+        temp.textContent = str;
+        return temp.innerHTML;
+    },
+    
+    // Validate badge data structure
+    validateBadgeData(data) {
+        if (!Array.isArray(data)) return false;
+        return data.every(item => 
+            typeof item === 'string' && 
+            /^[a-z]+$/.test(item) &&
+            towns[item] !== undefined
+        );
+    }
+};
+
 // Town data
 const towns = {
     tsurugi: '鶴来',
@@ -153,7 +184,18 @@ document.addEventListener('DOMContentLoaded', function() {
 // Get stamps from localStorage
 function getStamps() {
     const stamps = localStorage.getItem('hakusan_badges');
-    return stamps ? JSON.parse(stamps) : [];
+    if (!stamps) return [];
+    
+    const parsed = SecurityUtils.safeJSONParse(stamps, []);
+    
+    // Validate data structure
+    if (!SecurityUtils.validateBadgeData(parsed)) {
+        logger.error('Invalid badge data detected, resetting');
+        localStorage.removeItem('hakusan_badges');
+        return [];
+    }
+    
+    return parsed;
 }
 
 // 確実にバッジアイコンを更新する専用関数
