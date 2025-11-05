@@ -463,10 +463,36 @@ class IncentiveSystem {
         // Update secret content
         this.updateSecretContentDisplay();
         
+        // Update rewards display
+        this.updateRewardsDisplay();
+        
         // Trigger external update if available
         if (window.updateIncentiveContent) {
             window.updateIncentiveContent();
         }
+    }
+    
+    updateRewardsDisplay() {
+        const badges = this.getBadges();
+        const badgeCount = badges.length;
+        
+        // 報酬アイテムを更新
+        document.querySelectorAll('.reward-item').forEach(item => {
+            const required = parseInt(item.dataset.required);
+            const statusElement = item.querySelector('.reward-status');
+            
+            if (badgeCount >= required) {
+                item.classList.add('unlocked');
+                if (statusElement) {
+                    statusElement.textContent = '✅ 獲得可能！';
+                }
+            } else {
+                item.classList.remove('unlocked');
+                if (statusElement) {
+                    statusElement.textContent = `🔒 ${required}個で解放`;
+                }
+            }
+        });
     }
 
     // ===========================================
