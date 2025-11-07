@@ -202,24 +202,23 @@ class IncentiveSystem {
     
     checkSecretContentUnlock(trigger) {
         const badges = this.getBadges();
+        const badgeCount = badges.length;
         
-        // First badge unlock
-        if (badges.length === 1 && !this.unlockedContent.includes('hot_springs')) {
-            this.unlockSecretContent('hot_springs', '🌸 隠された温泉マップ', 
-                '白山の秘湯スポットが解放されました！地元の人だけが知る温泉情報をゲット！');
-        }
+        // デジタルコンテンツの段階的解放
+        const contentUnlocks = [
+            { count: 1, id: 'hot_springs', title: '隠された温泉マップ', description: '白山の秘湯スポットが解放されました！' },
+            { count: 2, id: 'panorama_view', title: '白山360°パノラマビュー', description: '山頂からの圧巻の景色を体験できます！' },
+            { count: 4, id: 'documentary', title: '白山秘話ドキュメンタリー', description: '泰澄大師の足跡と白山信仰の歴史を辿る特別映像！' },
+            { count: 6, id: 'soundtrack', title: '白山オリジナルサウンドトラック', description: '四季を奏でる癒しの音楽コレクションが解放されました！' },
+            { count: 8, id: 'ar_filter', title: 'チャンピオン限定ARフィルター', description: 'SNSで使える特別なARフィルターをゲット！' }
+        ];
         
-        // Half completion
-        if (badges.length === 4 && !this.unlockedContent.includes('legend_story')) {
-            this.unlockSecretContent('legend_story', '📜 白山伝説ストーリー', 
-                '白山に眠る古代の伝説が明かされます。この土地の神秘的な歴史を発見！');
-        }
-        
-        // All badges
-        if (badges.length === 8 && !this.unlockedContent.includes('photo_spots')) {
-            this.unlockSecretContent('photo_spots', '📸 伝説のフォトスポット', 
-                'インスタ映え確実！地元カメラマンが厳選した絶景スポットを大公開！');
-        }
+        // バッジ数に応じたコンテンツ解放チェック
+        contentUnlocks.forEach(unlock => {
+            if (badgeCount >= unlock.count && !this.unlockedContent.includes(unlock.id)) {
+                this.unlockSecretContent(unlock.id, unlock.title, unlock.description);
+            }
+        });
     }
 
     unlockSecretContent(contentId, title, description) {
@@ -583,12 +582,20 @@ class IncentiveSystem {
             if (badgeCount >= required) {
                 item.classList.add('unlocked');
                 if (statusElement) {
-                    statusElement.innerHTML = '<img src="icons/ui/checkmark.svg" alt="チェック" class="icon-inline"> 獲得可能！';
+                    statusElement.innerHTML = '<i data-lucide="check-circle" style="width: 16px; height: 16px; color: #27ae60;"></i> 解放済み！';
+                    // Lucideアイコン再初期化
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
                 }
             } else {
                 item.classList.remove('unlocked');
                 if (statusElement) {
-                    statusElement.innerHTML = `<img src="icons/ui/lock.svg" alt="ロック" class="icon-inline"> ${required}個で解放`;
+                    statusElement.innerHTML = `<i data-lucide="lock" style="width: 16px; height: 16px;"></i> ${required}個で解放`;
+                    // Lucideアイコン再初期化
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
                 }
             }
         });
