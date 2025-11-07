@@ -533,5 +533,65 @@
             logger.log('PWAインストール可能');
         });
     </script>
+    
+    <!-- インタラクティブコンテンツのJavaScript -->
+    <script>
+        // パノラマビューのインタラクティブ機能
+        let panoramaRotation = 0;
+        
+        function rotatePanorama(degrees) {
+            panoramaRotation += degrees;
+            const scene = document.querySelector('.panorama-scene');
+            if (scene) {
+                scene.style.transform = `translateX(${-panoramaRotation}px)`;
+            }
+        }
+        
+        function resetPanorama() {
+            panoramaRotation = 0;
+            const scene = document.querySelector('.panorama-scene');
+            if (scene) {
+                scene.style.transform = 'translateX(0)';
+            }
+        }
+        
+        // パノラマビューのドラッグ機能
+        document.addEventListener('DOMContentLoaded', function() {
+            const panoramaViewer = document.querySelector('.panorama-viewer');
+            if (panoramaViewer) {
+                let isDragging = false;
+                let startX = 0;
+                let currentRotation = 0;
+                
+                panoramaViewer.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    startX = e.clientX;
+                    panoramaViewer.style.cursor = 'grabbing';
+                });
+                
+                panoramaViewer.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    const deltaX = e.clientX - startX;
+                    currentRotation = deltaX;
+                    const scene = panoramaViewer.querySelector('.panorama-scene');
+                    if (scene) {
+                        scene.style.transform = `translateX(${currentRotation}px)`;
+                    }
+                });
+                
+                panoramaViewer.addEventListener('mouseup', () => {
+                    isDragging = false;
+                    panoramaViewer.style.cursor = 'grab';
+                    panoramaRotation += currentRotation;
+                    currentRotation = 0;
+                });
+                
+                panoramaViewer.addEventListener('mouseleave', () => {
+                    isDragging = false;
+                    panoramaViewer.style.cursor = 'grab';
+                });
+            }
+        });
+    </script>
 </body>
 </html>
