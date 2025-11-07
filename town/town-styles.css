@@ -310,3 +310,210 @@ h1, h2, h3, .title {
     50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
     100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
 }
+
+/* ========== 統一フォーマット用スタイル ========== */
+
+/* 町の魅力セクション */
+.highlight-section {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.attraction-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-top: 1rem;
+}
+
+.lead-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #2c3e50;
+}
+
+.lead-text strong {
+    color: #e91e63;
+    font-weight: 600;
+}
+
+/* 見どころハイライト */
+.highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.highlight-item {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.highlight-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.highlight-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.highlight-icon i {
+    width: 32px;
+    height: 32px;
+}
+
+.highlight-item h3 {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: #2c3e50;
+}
+
+.highlight-item p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* 冒険ポイントリスト */
+.adventure-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+.adventure-list li {
+    background: white;
+    border-left: 4px solid #667eea;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.adventure-list li:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+}
+
+.point-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.point-title {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1.05rem;
+}
+
+.point-desc {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* 物語セクション */
+.story-text {
+    margin: 1.5rem 0;
+}
+
+.story-paragraph {
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 1rem;
+}
+
+.story-highlight {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    font-weight: 500;
+    color: #856404;
+}
+
+/* 地域の宝セクション */
+.treasure-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-top: 2rem;
+    color: white;
+}
+
+.treasure-section h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.treasure-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.5rem;
+}
+
+.treasure-item {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.treasure-item:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+}
+
+.treasure-emoji {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.8rem;
+}
+
+.treasure-item strong {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 1.05rem;
+}
+
+.treasure-item span {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .highlight-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .treasure-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .highlight-section, .treasure-section {
+        padding: 1.5rem;
+    }
+    
+    .adventure-list li {
+        padding: 1rem;
+    }
+}
