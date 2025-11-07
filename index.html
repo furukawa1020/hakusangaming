@@ -316,63 +316,134 @@
             </div>
 
             <div class="secret-content" data-content-id="documentary" data-required="4">
-                <h3><i data-lucide="video" style="width: 24px; height: 24px;"></i> 白山秘話ドキュメンタリー</h3>
+                <h3><i data-lucide="book-open" style="width: 24px; height: 24px;"></i> 白山フォトストーリー</h3>
                 <div class="locked-content">
-                    <p>このコンテンツは4個目のバッジ獲得で解放されます。泰澄大師の足跡と白山信仰の歴史を辿る特別映像！</p>
+                    <p>このコンテンツは4個目のバッジ獲得で解放されます。泰澄大師の足跡と白山信仰の歴史を辿る写真物語！</p>
                 </div>
                 <div class="unlocked-content" style="display: none;">
-                    <div class="documentary-player" style="background: #000; border-radius: 10px; overflow: hidden;">
-                        <div class="video-chapters" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; padding: 1.5rem;">
-                            <div class="chapter-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1.5rem; border-radius: 10px; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <!-- オリジナルSVGイラスト+テキストのフォトストーリー（完全商用利用可） -->
+                    <div class="photo-story" style="background: #1a1a1a; border-radius: 10px; overflow: hidden; padding: 1.5rem;">
+                        <div class="story-chapters" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                            
+                            <!-- 第1章: 泰澄大師の開山伝説 -->
+                            <div class="story-card" onclick="this.classList.toggle('expanded')" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1.5rem; border-radius: 10px; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                                <!-- SVG Illustration: 山を登る修験者 -->
+                                <svg viewBox="0 0 200 150" style="width: 100%; height: 150px; margin-bottom: 1rem; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                    <defs>
+                                        <linearGradient id="sky1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#87CEEB;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <rect width="200" height="150" fill="url(#sky1)"/>
+                                    <polygon points="0,120 50,80 100,100 150,60 200,90 200,150 0,150" fill="#2D3748"/>
+                                    <polygon points="80,100 100,70 120,100" fill="#E8F4F8"/>
+                                    <circle cx="100" cy="50" r="3" fill="#FDB813"/>
+                                    <text x="100" y="140" text-anchor="middle" fill="white" font-size="12" font-weight="bold">717年 開山</text>
+                                </svg>
                                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                                    <i data-lucide="play-circle" style="width: 32px; height: 32px; color: white;"></i>
+                                    <i data-lucide="book-open" style="width: 24px; height: 24px; color: white;"></i>
                                     <span style="color: white; font-weight: bold;">第1章</span>
                                 </div>
                                 <h4 style="color: white; margin: 0 0 8px 0;">泰澄大師の開山伝説</h4>
-                                <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">養老元年(717年)、泰澄が白山を開いた歴史</p>
+                                <p style="color: rgba(255,255,255,0.9); font-size: 0.85rem; line-height: 1.6;">養老元年(717年)、越前の修験者・泰澄は36歳で白山の初登頂に成功。山頂で白山権現の神託を受け、白山信仰の礎を築きました。</p>
                             </div>
-                            <div class="chapter-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 1.5rem; border-radius: 10px; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            
+                            <!-- 第2章: 白山比咩神社の秘密 -->
+                            <div class="story-card" onclick="this.classList.toggle('expanded')" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 1.5rem; border-radius: 10px; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                                <!-- SVG Illustration: 神社の鳥居 -->
+                                <svg viewBox="0 0 200 150" style="width: 100%; height: 150px; margin-bottom: 1rem; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                    <rect width="200" height="150" fill="#FFF5E6"/>
+                                    <rect x="30" y="110" width="140" height="40" fill="#8B4513" opacity="0.3"/>
+                                    <rect x="70" y="40" width="8" height="80" fill="#C41E3A"/>
+                                    <rect x="122" y="40" width="8" height="80" fill="#C41E3A"/>
+                                    <rect x="50" y="50" width="100" height="12" rx="2" fill="#C41E3A"/>
+                                    <rect x="40" y="65" width="120" height="8" rx="1" fill="#C41E3A"/>
+                                    <circle cx="100" cy="30" r="8" fill="#FFD700"/>
+                                    <text x="100" y="145" text-anchor="middle" fill="#333" font-size="10" font-weight="bold">加賀国一宮</text>
+                                </svg>
                                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                                    <i data-lucide="play-circle" style="width: 32px; height: 32px; color: white;"></i>
+                                    <i data-lucide="book-open" style="width: 24px; height: 24px; color: white;"></i>
                                     <span style="color: white; font-weight: bold;">第2章</span>
                                 </div>
                                 <h4 style="color: white; margin: 0 0 8px 0;">白山比咩神社の秘密</h4>
-                                <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">加賀国一宮として2100年以上の歴史を持つ神社</p>
+                                <p style="color: rgba(255,255,255,0.9); font-size: 0.85rem; line-height: 1.6;">紀元前91年創建と伝わる加賀国一宮。菊理媛神(くくりひめのかみ)を主祭神とし、縁結びと水の神として崇敬されています。</p>
                             </div>
-                            <div class="chapter-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 1.5rem; border-radius: 10px; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            
+                            <!-- 第3章: 手取川の恵み -->
+                            <div class="story-card" onclick="this.classList.toggle('expanded')" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 1.5rem; border-radius: 10px; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                                <!-- SVG Illustration: 川の流れ -->
+                                <svg viewBox="0 0 200 150" style="width: 100%; height: 150px; margin-bottom: 1rem; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                    <defs>
+                                        <linearGradient id="water" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#4fc3f7;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#29b6f6;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <rect width="200" height="150" fill="#E3F2FD"/>
+                                    <path d="M 0,80 Q 50,70 100,80 T 200,80 L 200,150 L 0,150 Z" fill="url(#water)"/>
+                                    <ellipse cx="40" cy="75" rx="15" ry="5" fill="rgba(255,255,255,0.4)"/>
+                                    <ellipse cx="100" cy="85" rx="20" ry="6" fill="rgba(255,255,255,0.4)"/>
+                                    <ellipse cx="160" cy="75" rx="18" ry="5" fill="rgba(255,255,255,0.4)"/>
+                                    <polygon points="10,100 30,90 20,110" fill="#2E7D32"/>
+                                    <polygon points="180,95 195,85 190,105" fill="#2E7D32"/>
+                                    <text x="100" y="140" text-anchor="middle" fill="#01579B" font-size="11" font-weight="bold">手取川 72km</text>
+                                </svg>
                                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                                    <i data-lucide="play-circle" style="width: 32px; height: 32px; color: white;"></i>
+                                    <i data-lucide="book-open" style="width: 24px; height: 24px; color: white;"></i>
                                     <span style="color: white; font-weight: bold;">第3章</span>
                                 </div>
                                 <h4 style="color: white; margin: 0 0 8px 0;">手取川の恵み</h4>
-                                <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">白山から流れる清流が育む豊かな文化</p>
+                                <p style="color: rgba(255,255,255,0.9); font-size: 0.85rem; line-height: 1.6;">白山を源流とする全長72kmの清流。古くから農業用水として利用され、加賀平野の豊かな米作りを支えてきました。</p>
                             </div>
-                            <div class="chapter-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 1.5rem; border-radius: 10px; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            
+                            <!-- 第4章: 現代に生きる白山信仰 -->
+                            <div class="story-card" onclick="this.classList.toggle('expanded')" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 1.5rem; border-radius: 10px; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                                <!-- SVG Illustration: 祭りの灯り -->
+                                <svg viewBox="0 0 200 150" style="width: 100%; height: 150px; margin-bottom: 1rem; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                    <rect width="200" height="150" fill="#2C3E50"/>
+                                    <circle cx="60" cy="60" r="20" fill="#FF6B6B" opacity="0.8"/>
+                                    <circle cx="60" cy="60" r="15" fill="#FFA500" opacity="0.9"/>
+                                    <circle cx="140" cy="70" r="18" fill="#FF6B6B" opacity="0.8"/>
+                                    <circle cx="140" cy="70" r="13" fill="#FFA500" opacity="0.9"/>
+                                    <circle cx="100" cy="90" r="22" fill="#FF6B6B" opacity="0.8"/>
+                                    <circle cx="100" cy="90" r="17" fill="#FFA500" opacity="0.9"/>
+                                    <rect x="95" y="110" width="10" height="30" fill="#8B4513"/>
+                                    <polygon points="50,130 100,115 150,130 150,140 50,140" fill="#4A5568"/>
+                                    <text x="100" y="145" text-anchor="middle" fill="white" font-size="10" font-weight="bold">伝統行事継承中</text>
+                                </svg>
                                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                                    <i data-lucide="play-circle" style="width: 32px; height: 32px; color: white;"></i>
+                                    <i data-lucide="book-open" style="width: 24px; height: 24px; color: white;"></i>
                                     <span style="color: white; font-weight: bold;">第4章</span>
                                 </div>
                                 <h4 style="color: white; margin: 0 0 8px 0;">現代に生きる白山信仰</h4>
-                                <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">今も続く祭りと伝統行事</p>
+                                <p style="color: rgba(255,255,255,0.9); font-size: 0.85rem; line-height: 1.6;">毎年7月の「おかげまいり」など、1300年以上続く祭りや伝統行事が今も地域の人々によって大切に守られています。</p>
                             </div>
+                            
                         </div>
                     </div>
-                    <p style="margin-top: 1rem; color: #7f8c8d; text-align: center;">各チャプターをクリックして視聴</p>
+                    <p style="margin-top: 1rem; color: #7f8c8d; text-align: center;">📖 各章をクリックして詳細を確認</p>
                 </div>
             </div>
 
             <div class="secret-content" data-content-id="soundtrack" data-required="6">
-                <h3><i data-lucide="music" style="width: 24px; height: 24px;"></i> 白山オリジナルサウンドトラック</h3>
+                <h3><i data-lucide="music" style="width: 24px; height: 24px;"></i> 白山サウンドスケープ</h3>
                 <div class="locked-content">
-                    <p>このコンテンツは6個目のバッジ獲得で解放されます。白山の四季を奏でるオリジナル楽曲コレクション！</p>
+                    <p>このコンテンツは6個目のバッジ獲得で解放されます。白山の四季を奏でる自然音コレクション！</p>
                 </div>
                 <div class="unlocked-content" style="display: none;">
-                    <div class="music-player" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 15px; color: white;">
+                    <!-- オリジナルサウンドスケープUI（完全商用利用可） -->
+                    <div class="soundscape-player" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 15px; color: white;">
                         <div class="now-playing" style="text-align: center; margin-bottom: 2rem;">
-                            <div style="width: 200px; height: 200px; margin: 0 auto 1rem; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: spin 20s linear infinite;">
-                                <i data-lucide="disc-3" style="width: 100px; height: 100px;"></i>
+                            <!-- 回転するビジュアライザー（CSS Animation） -->
+                            <div style="width: 200px; height: 200px; margin: 0 auto 1rem; position: relative;">
+                                <div style="position: absolute; width: 100%; height: 100%; border-radius: 50%; background: rgba(255,255,255,0.1); animation: spin 20s linear infinite;">
+                                    <div style="position: absolute; top: 10%; left: 50%; width: 4px; height: 40%; background: rgba(255,255,255,0.6); transform: translateX(-50%);"></div>
+                                    <div style="position: absolute; top: 50%; left: 10%; width: 40%; height: 4px; background: rgba(255,255,255,0.6); transform: translateY(-50%);"></div>
+                                </div>
+                                <i data-lucide="volume-2" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px;"></i>
                             </div>
-                            <h4 style="margin: 0 0 0.5rem 0; font-size: 1.5rem;">春の訪れ - 白山麓の目覚め</h4>
+                            <h4 style="margin: 0 0 0.5rem 0; font-size: 1.5rem;">🌸 春の訪れ - 白山麓の目覚め</h4>
                             <p style="margin: 0; opacity: 0.8;">作曲: 白山音楽プロジェクト</p>
                         </div>
                         <div class="playlist" style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 10px;">
