@@ -248,23 +248,70 @@
                     <p>このコンテンツは2個目のバッジ獲得で解放されます。白山山頂からの圧巻の360度パノラマビューを体験！</p>
                 </div>
                 <div class="unlocked-content" style="display: none;">
+                    <!-- CSS Gradient パノラマビュー（完全オリジナル・商用利用可） -->
                     <div class="panorama-viewer" style="width: 100%; height: 400px; background: linear-gradient(to bottom, #87CEEB 0%, #98D8E8 50%, #B0E2F0 100%); border-radius: 10px; position: relative; overflow: hidden; cursor: grab;">
-                        <div class="panorama-scene" style="position: absolute; width: 300%; height: 100%; background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200') center/cover; transition: transform 0.3s ease;"></div>
+                        <!-- 白山パノラマシーン（SVG+グラデーションで構成） -->
+                        <div class="panorama-scene" style="position: absolute; width: 300%; height: 100%; transition: transform 0.3s ease;">
+                            <!-- 背景レイヤー: 空のグラデーション -->
+                            <div style="position: absolute; width: 100%; height: 60%; top: 0; background: linear-gradient(to bottom, #4A90E2 0%, #87CEEB 40%, #B8D5ED 100%);"></div>
+                            
+                            <!-- 山岳レイヤー1: 遠景の山々 -->
+                            <svg viewBox="0 0 1200 400" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;">
+                                <polygon points="0,250 200,180 400,220 600,150 800,190 1000,160 1200,200 1200,400 0,400" fill="#9B9B9B" opacity="0.3"/>
+                                <polygon points="0,270 250,200 500,240 750,170 1000,210 1200,180 1200,400 0,400" fill="#7D7D7D" opacity="0.4"/>
+                            </svg>
+                            
+                            <!-- 山岳レイヤー2: 白山本峰 -->
+                            <svg viewBox="0 0 1200 400" style="position: absolute; width: 100%; height: 100%; top: 0; left: 33.3%;">
+                                <defs>
+                                    <linearGradient id="mountain-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+                                        <stop offset="40%" style="stop-color:#E8F4F8;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#4A5568;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <polygon points="600,120 700,200 800,180 900,250 1000,230 1100,280 1200,260 1200,400 600,400" fill="url(#mountain-gradient)"/>
+                                <polygon points="400,180 500,240 600,220 700,280 800,260 900,300 1000,290 1000,400 400,400" fill="#5A6C7D" opacity="0.7"/>
+                            </svg>
+                            
+                            <!-- 山岳レイヤー3: 近景の尾根 -->
+                            <svg viewBox="0 0 1200 400" style="position: absolute; width: 100%; height: 100%; top: 0; left: 66.6%;">
+                                <polygon points="0,300 200,250 400,280 600,240 800,270 1000,250 1200,290 1200,400 0,400" fill="#2D3748" opacity="0.8"/>
+                                <polygon points="100,320 300,280 500,310 700,270 900,300 1100,280 1200,310 1200,400 100,400" fill="#1A202C"/>
+                            </svg>
+                            
+                            <!-- 樹木レイヤー: 山麓の森 -->
+                            <div style="position: absolute; bottom: 0; width: 100%; height: 30%; background: linear-gradient(to bottom, transparent 0%, #1a4d2e 50%, #0d2818 100%);"></div>
+                            
+                            <!-- 雲レイヤー -->
+                            <div style="position: absolute; top: 15%; left: 10%; width: 100px; height: 40px; background: rgba(255,255,255,0.6); border-radius: 50%; filter: blur(8px);"></div>
+                            <div style="position: absolute; top: 25%; left: 120%; width: 120px; height: 50px; background: rgba(255,255,255,0.5); border-radius: 50%; filter: blur(10px);"></div>
+                            <div style="position: absolute; top: 30%; left: 220%; width: 90px; height: 35px; background: rgba(255,255,255,0.7); border-radius: 50%; filter: blur(6px);"></div>
+                        </div>
+                        
                         <div class="panorama-controls" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; background: rgba(255,255,255,0.9); padding: 10px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
                             <button onclick="rotatePanorama(-30)" style="border: none; background: #3498db; color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer;"><i data-lucide="chevron-left" style="width: 16px; height: 16px;"></i></button>
                             <button onclick="rotatePanorama(30)" style="border: none; background: #3498db; color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer;"><i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i></button>
                             <button onclick="resetPanorama()" style="border: none; background: #2ecc71; color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer;"><i data-lucide="maximize" style="width: 16px; height: 16px;"></i></button>
                         </div>
+                        
+                        <!-- ランドマークマーカー -->
                         <div class="landmark-markers">
-                            <div class="marker" style="position: absolute; top: 40%; left: 30%;" data-name="手取川">
-                                <div style="width: 12px; height: 12px; background: #e74c3c; border: 2px solid white; border-radius: 50%; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>
+                            <div class="marker" style="position: absolute; top: 70%; left: 25%;" data-name="手取川" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                <div style="width: 12px; height: 12px; background: #3498db; border: 2px solid white; border-radius: 50%; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>
+                                <div class="tooltip" style="display: none; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 5px 10px; border-radius: 5px; white-space: nowrap; font-size: 12px;">手取川</div>
                             </div>
-                            <div class="marker" style="position: absolute; top: 60%; left: 60%;" data-name="白山比咩神社">
+                            <div class="marker" style="position: absolute; top: 75%; left: 145%;" data-name="白山比咩神社" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
+                                <div style="width: 12px; height: 12px; background: #e74c3c; border: 2px solid white; border-radius: 50%; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>
+                                <div class="tooltip" style="display: none; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 5px 10px; border-radius: 5px; white-space: nowrap; font-size: 12px;">白山比咩神社</div>
+                            </div>
+                            <div class="marker" style="position: absolute; top: 45%; left: 180%;" data-name="白山山頂" onmouseover="this.querySelector('.tooltip').style.display='block'" onmouseout="this.querySelector('.tooltip').style.display='none'">
                                 <div style="width: 12px; height: 12px; background: #f39c12; border: 2px solid white; border-radius: 50%; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>
+                                <div class="tooltip" style="display: none; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 5px 10px; border-radius: 5px; white-space: nowrap; font-size: 12px;">白山山頂(2,702m)</div>
                             </div>
                         </div>
                     </div>
-                    <p style="margin-top: 1rem; color: #7f8c8d; text-align: center;">ドラッグまたはボタンで視点を変更できます</p>
+                    <p style="margin-top: 1rem; color: #7f8c8d; text-align: center;">🖱️ ドラッグまたはボタンで白山パノラマを探索できます</p>
                 </div>
             </div>
 
