@@ -216,36 +216,218 @@
             
             <!-- Completion Rewards -->
             <div class="rewards-container">
-                <h3 style="text-align: center; color: #2c3e50; margin-bottom: 1.5rem;"><i data-lucide="gift" style="width: 24px; height: 24px;"></i> 獲得報酬</h3>
+                <h3 style="text-align: center; color: #2c3e50; margin-bottom: 1.5rem;"><i data-lucide="gift" style="width: 24px; height: 24px;"></i> 解放コンテンツ</h3>
                 <div class="rewards-grid">
                     <div class="reward-item" data-required="2">
-                        <div class="reward-icon"><i data-lucide="sticker" style="width: 48px; height: 48px;"></i></div>
-                        <div class="reward-name">限定ステッカー</div>
+                        <div class="reward-icon"><i data-lucide="map" style="width: 48px; height: 48px;"></i></div>
+                        <div class="reward-name">白山360°パノラマビュー</div>
                         <div class="reward-status"><i data-lucide="lock" style="width: 16px; height: 16px;"></i> 2個で解放</div>
                     </div>
                     <div class="reward-item" data-required="4">
-                        <div class="reward-icon"><i data-lucide="shirt" style="width: 48px; height: 48px;"></i></div>
-                        <div class="reward-name">オリジナルタオル</div>
+                        <div class="reward-icon"><i data-lucide="video" style="width: 48px; height: 48px;"></i></div>
+                        <div class="reward-name">白山秘話ドキュメンタリー</div>
                         <div class="reward-status"><i data-lucide="lock" style="width: 16px; height: 16px;"></i> 4個で解放</div>
                     </div>
-                    <div class="reward-item" data-required="8">
-                        <div class="reward-icon"><i data-lucide="shirt" style="width: 48px; height: 48px;"></i></div>
-                        <div class="reward-name">特製Tシャツ</div>
-                        <div class="reward-status"><i data-lucide="lock" style="width: 16px; height: 16px;"></i> 全制覇で解放</div>
+                    <div class="reward-item" data-required="6">
+                        <div class="reward-icon"><i data-lucide="music" style="width: 48px; height: 48px;"></i></div>
+                        <div class="reward-name">白山オリジナルサウンドトラック</div>
+                        <div class="reward-status"><i data-lucide="lock" style="width: 16px; height: 16px;"></i> 6個で解放</div>
                     </div>
                     <div class="reward-item" data-required="8">
-                        <div class="reward-icon"><i data-lucide="award" style="width: 48px; height: 48px;"></i></div>
-                        <div class="reward-name">チャンピオン認定証</div>
+                        <div class="reward-icon"><i data-lucide="crown" style="width: 48px; height: 48px;"></i></div>
+                        <div class="reward-name">チャンピオン限定ARフィルター</div>
                         <div class="reward-status"><i data-lucide="lock" style="width: 16px; height: 16px;"></i> 全制覇で解放</div>
                     </div>
                 </div>
             </div>
             
             <!-- Secret Content Area -->
+            <div class="secret-content" data-content-id="panorama_view" data-required="2">
+                <h3><i data-lucide="mountain" style="width: 24px; height: 24px;"></i> 白山360°パノラマビュー</h3>
+                <div class="locked-content">
+                    <p>このコンテンツは2個目のバッジ獲得で解放されます。白山山頂からの圧巻の360度パノラマビューを体験！</p>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <div class="panorama-viewer" style="width: 100%; height: 400px; background: linear-gradient(to bottom, #87CEEB 0%, #98D8E8 50%, #B0E2F0 100%); border-radius: 10px; position: relative; overflow: hidden; cursor: grab;">
+                        <div class="panorama-scene" style="position: absolute; width: 300%; height: 100%; background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200') center/cover; transition: transform 0.3s ease;"></div>
+                        <div class="panorama-controls" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; background: rgba(255,255,255,0.9); padding: 10px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                            <button onclick="rotatePanorama(-30)" style="border: none; background: #3498db; color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer;"><i data-lucide="chevron-left" style="width: 16px; height: 16px;"></i></button>
+                            <button onclick="rotatePanorama(30)" style="border: none; background: #3498db; color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer;"><i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i></button>
+                            <button onclick="resetPanorama()" style="border: none; background: #2ecc71; color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer;"><i data-lucide="maximize" style="width: 16px; height: 16px;"></i></button>
+                        </div>
+                        <div class="landmark-markers">
+                            <div class="marker" style="position: absolute; top: 40%; left: 30%;" data-name="手取川">
+                                <div style="width: 12px; height: 12px; background: #e74c3c; border: 2px solid white; border-radius: 50%; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>
+                            </div>
+                            <div class="marker" style="position: absolute; top: 60%; left: 60%;" data-name="白山比咩神社">
+                                <div style="width: 12px; height: 12px; background: #f39c12; border: 2px solid white; border-radius: 50%; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; color: #7f8c8d; text-align: center;">ドラッグまたはボタンで視点を変更できます</p>
+                </div>
+            </div>
+
+            <div class="secret-content" data-content-id="documentary" data-required="4">
+                <h3><i data-lucide="video" style="width: 24px; height: 24px;"></i> 白山秘話ドキュメンタリー</h3>
+                <div class="locked-content">
+                    <p>このコンテンツは4個目のバッジ獲得で解放されます。泰澄大師の足跡と白山信仰の歴史を辿る特別映像！</p>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <div class="documentary-player" style="background: #000; border-radius: 10px; overflow: hidden;">
+                        <div class="video-chapters" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; padding: 1.5rem;">
+                            <div class="chapter-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1.5rem; border-radius: 10px; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                    <i data-lucide="play-circle" style="width: 32px; height: 32px; color: white;"></i>
+                                    <span style="color: white; font-weight: bold;">第1章</span>
+                                </div>
+                                <h4 style="color: white; margin: 0 0 8px 0;">泰澄大師の開山伝説</h4>
+                                <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">養老元年(717年)、泰澄が白山を開いた歴史</p>
+                            </div>
+                            <div class="chapter-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 1.5rem; border-radius: 10px; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                    <i data-lucide="play-circle" style="width: 32px; height: 32px; color: white;"></i>
+                                    <span style="color: white; font-weight: bold;">第2章</span>
+                                </div>
+                                <h4 style="color: white; margin: 0 0 8px 0;">白山比咩神社の秘密</h4>
+                                <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">加賀国一宮として2100年以上の歴史を持つ神社</p>
+                            </div>
+                            <div class="chapter-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 1.5rem; border-radius: 10px; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                    <i data-lucide="play-circle" style="width: 32px; height: 32px; color: white;"></i>
+                                    <span style="color: white; font-weight: bold;">第3章</span>
+                                </div>
+                                <h4 style="color: white; margin: 0 0 8px 0;">手取川の恵み</h4>
+                                <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">白山から流れる清流が育む豊かな文化</p>
+                            </div>
+                            <div class="chapter-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 1.5rem; border-radius: 10px; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                    <i data-lucide="play-circle" style="width: 32px; height: 32px; color: white;"></i>
+                                    <span style="color: white; font-weight: bold;">第4章</span>
+                                </div>
+                                <h4 style="color: white; margin: 0 0 8px 0;">現代に生きる白山信仰</h4>
+                                <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">今も続く祭りと伝統行事</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; color: #7f8c8d; text-align: center;">各チャプターをクリックして視聴</p>
+                </div>
+            </div>
+
+            <div class="secret-content" data-content-id="soundtrack" data-required="6">
+                <h3><i data-lucide="music" style="width: 24px; height: 24px;"></i> 白山オリジナルサウンドトラック</h3>
+                <div class="locked-content">
+                    <p>このコンテンツは6個目のバッジ獲得で解放されます。白山の四季を奏でるオリジナル楽曲コレクション！</p>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <div class="music-player" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 15px; color: white;">
+                        <div class="now-playing" style="text-align: center; margin-bottom: 2rem;">
+                            <div style="width: 200px; height: 200px; margin: 0 auto 1rem; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: spin 20s linear infinite;">
+                                <i data-lucide="disc-3" style="width: 100px; height: 100px;"></i>
+                            </div>
+                            <h4 style="margin: 0 0 0.5rem 0; font-size: 1.5rem;">春の訪れ - 白山麓の目覚め</h4>
+                            <p style="margin: 0; opacity: 0.8;">作曲: 白山音楽プロジェクト</p>
+                        </div>
+                        <div class="playlist" style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 10px;">
+                            <h4 style="margin: 0 0 1rem 0; display: flex; align-items: center; gap: 8px;"><i data-lucide="list-music" style="width: 20px; height: 20px;"></i> プレイリスト</h4>
+                            <div class="track-list" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <div class="track" style="padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+                                    <i data-lucide="play" style="width: 16px; height: 16px;"></i>
+                                    <span style="flex: 1;">1. 春の訪れ - 白山麓の目覚め</span>
+                                    <span style="opacity: 0.7;">4:23</span>
+                                </div>
+                                <div class="track" style="padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+                                    <i data-lucide="play" style="width: 16px; height: 16px;"></i>
+                                    <span style="flex: 1;">2. 夏の緑風 - 手取川のせせらぎ</span>
+                                    <span style="opacity: 0.7;">5:12</span>
+                                </div>
+                                <div class="track" style="padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+                                    <i data-lucide="play" style="width: 16px; height: 16px;"></i>
+                                    <span style="flex: 1;">3. 秋の紅葉 - 山々の彩り</span>
+                                    <span style="opacity: 0.7;">3:45</span>
+                                </div>
+                                <div class="track" style="padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+                                    <i data-lucide="play" style="width: 16px; height: 16px;"></i>
+                                    <span style="flex: 1;">4. 冬の静寂 - 雪に包まれる白峰</span>
+                                    <span style="opacity: 0.7;">6:08</span>
+                                </div>
+                                <div class="track" style="padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+                                    <i data-lucide="play" style="width: 16px; height: 16px;"></i>
+                                    <span style="flex: 1;">5. 白山讃歌 - 永遠の霊峰</span>
+                                    <span style="opacity: 0.7;">7:30</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="player-controls" style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 1.5rem;">
+                            <button style="border: none; background: rgba(255,255,255,0.2); color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;"><i data-lucide="skip-back" style="width: 20px; height: 20px;"></i></button>
+                            <button style="border: none; background: white; color: #667eea; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2);"><i data-lucide="pause" style="width: 24px; height: 24px;"></i></button>
+                            <button style="border: none; background: rgba(255,255,255,0.2); color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;"><i data-lucide="skip-forward" style="width: 20px; height: 20px;"></i></button>
+                        </div>
+                    </div>
+                    <style>
+                        @keyframes spin {
+                            from { transform: rotate(0deg); }
+                            to { transform: rotate(360deg); }
+                        }
+                    </style>
+                </div>
+            </div>
+
+            <div class="secret-content" data-content-id="ar_filter" data-required="8">
+                <h3><i data-lucide="crown" style="width: 24px; height: 24px;"></i> チャンピオン限定ARフィルター</h3>
+                <div class="locked-content">
+                    <p>このコンテンツは全制覇で解放されます。SNSで使えるオリジナルARフィルターをゲット！</p>
+                </div>
+                <div class="unlocked-content" style="display: none;">
+                    <div class="ar-showcase" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 2rem; border-radius: 15px; color: white;">
+                        <div style="text-align: center; margin-bottom: 2rem;">
+                            <div style="width: 150px; height: 150px; margin: 0 auto 1rem; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 4px solid rgba(255,255,255,0.5);">
+                                <i data-lucide="crown" style="width: 80px; height: 80px;"></i>
+                            </div>
+                            <h4 style="margin: 0 0 0.5rem 0; font-size: 1.8rem;">ハクサンリーグチャンピオン</h4>
+                            <p style="margin: 0; opacity: 0.9;">全8ジム制覇達成！</p>
+                        </div>
+                        <div class="ar-filters-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                            <div class="filter-preview" style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 10px; text-align: center; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                <div style="width: 80px; height: 80px; margin: 0 auto 0.5rem; background: rgba(255,255,255,0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                    <i data-lucide="sparkles" style="width: 40px; height: 40px;"></i>
+                                </div>
+                                <p style="margin: 0; font-size: 0.9rem;">白山オーラ</p>
+                            </div>
+                            <div class="filter-preview" style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 10px; text-align: center; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                <div style="width: 80px; height: 80px; margin: 0 auto 0.5rem; background: rgba(255,255,255,0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                    <i data-lucide="mountain" style="width: 40px; height: 40px;"></i>
+                                </div>
+                                <p style="margin: 0; font-size: 0.9rem;">山頂フレーム</p>
+                            </div>
+                            <div class="filter-preview" style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 10px; text-align: center; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                <div style="width: 80px; height: 80px; margin: 0 auto 0.5rem; background: rgba(255,255,255,0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                    <i data-lucide="crown" style="width: 40px; height: 40px;"></i>
+                                </div>
+                                <p style="margin: 0; font-size: 0.9rem;">チャンピオンクラウン</p>
+                            </div>
+                            <div class="filter-preview" style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 10px; text-align: center; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                <div style="width: 80px; height: 80px; margin: 0 auto 0.5rem; background: rgba(255,255,255,0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                    <i data-lucide="zap" style="width: 40px; height: 40px;"></i>
+                                </div>
+                                <p style="margin: 0; font-size: 0.9rem;">バッジエフェクト</p>
+                            </div>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 10px; text-align: center;">
+                            <p style="margin: 0 0 1rem 0; font-size: 1.1rem;">QRコードでスマホにダウンロード</p>
+                            <div style="width: 150px; height: 150px; margin: 0 auto; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                <i data-lucide="qr-code" style="width: 100px; height: 100px; color: #000;"></i>
+                            </div>
+                            <p style="margin: 1rem 0 0 0; opacity: 0.8; font-size: 0.9rem;">InstagramやTikTokで使用可能</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="secret-content" data-content-id="hot_springs">
                 <h3><i data-lucide="sparkles" style="width: 24px; height: 24px;"></i> 隠された温泉マップ</h3>
                 <div class="locked-content">
-                    <p>このコンテンツは1個目のバッジ獲得で解放されます。白山の秘湯スポットガイドをゲット！</p>
+                    <p>このコンテンツは1個目のバッジ獲得で解放されます。白山の秘湯スポットガイドをゲット!</p>
                 </div>
                 <div class="unlocked-content" style="display: none;">
                     <h4><i data-lucide="mountain" style="width: 20px; height: 20px;"></i> 白山麓の温泉</h4>
