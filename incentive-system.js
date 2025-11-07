@@ -207,10 +207,10 @@ class IncentiveSystem {
         // デジタルコンテンツの段階的解放
         const contentUnlocks = [
             { count: 1, id: 'hot_springs', title: '隠された温泉マップ', description: '白山の秘湯スポットが解放されました！' },
-            { count: 2, id: 'panorama_view', title: '白山360°パノラマビュー', description: '山頂からの圧巻の景色を体験できます！' },
-            { count: 4, id: 'documentary', title: '白山秘話ドキュメンタリー', description: '泰澄大師の足跡と白山信仰の歴史を辿る特別映像！' },
-            { count: 6, id: 'soundtrack', title: '白山オリジナルサウンドトラック', description: '四季を奏でる癒しの音楽コレクションが解放されました！' },
-            { count: 8, id: 'ar_filter', title: 'チャンピオン限定ARフィルター', description: 'SNSで使える特別なARフィルターをゲット！' }
+            { count: 2, id: 'panorama_view', title: '白山360°パノラマビュー', description: 'SVG山岳グラフィックで描かれた圧巻の白山パノラマ！' },
+            { count: 4, id: 'documentary', title: '白山フォトストーリー', description: '泰澄大師の足跡と白山信仰の歴史を辿る写真物語！' },
+            { count: 6, id: 'soundtrack', title: '白山サウンドスケープ', description: '四季を奏でる自然音コレクションが解放されました！' },
+            { count: 8, id: 'ar_filter', title: 'チャンピオン記念シェア画像', description: 'SNSで使える特別な記念画像をゲット！' }
         ];
         
         // バッジ数に応じたコンテンツ解放チェック
